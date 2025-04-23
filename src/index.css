@@ -11,6 +11,15 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Responsive breakpoints */
+  --bp-phone-max: 768px;
+  --bp-tablet-max: 1024px;
+  --bp-laptop-max: 1280px;
+  --bp-proto: 1366px;
+  --bp-desktop-max: 1440px;
+  --bp-hd-max: 1920px;
+  --bp-uhd-max: 2560px;
 }
 
 a {
@@ -65,4 +74,25 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Responsive breakpoints media queries */
+@media (max-width: var(--bp-phone-max)) {
+  /* iPhone-sized portrait: adjust styles here */
+}
+
+@media (min-width: calc(var(--bp-phone-max) + 1px)) and (max-width: var(--bp-tablet-max)) {
+  /* iPad portrait: adjust layout here */
+}
+
+@media (min-width: calc(var(--bp-proto) + 1px)) and (max-width: var(--bp-desktop-max)) {
+  /* between prototyping width and small desktop */
+}
+
+@media (min-width: calc(var(--bp-desktop-max) + 1px)) and (max-width: var(--bp-hd-max)) {
+  /* 1441px → 1920px: adjust spacing */
+}
+
+@media (min-width: calc(var(--bp-hd-max) + 1px)) {
+  /* ultra-wide: adjust for extra space */
 }
