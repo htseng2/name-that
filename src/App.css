@@ -8,11 +8,14 @@
   min-height: 100vh;
   min-width: 100vw;
   background: radial-gradient(circle at center, #005d9d, #053b60);
+  padding: 32px;
 }
 
 .title {
   display: inline-block;
-  padding: 0.2em 0.5em;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  justify-self: center;
   font-family: "Shrikhand";
   font-weight: 400;
   font-style: italic;
@@ -29,4 +32,11 @@
   /* fallback outline via text-shadow */
   text-shadow: -2px -2px 0 #0e153c, 2px -2px 0 #0e153c, -2px 2px 0 #0e153c,
     2px 2px 0 #0e153c;
+}
+
+.three-by-six-grid {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem; /* adjust spacing as needed */
 }
