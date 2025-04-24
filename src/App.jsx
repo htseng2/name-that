@@ -5,9 +5,15 @@ function App() {
     <div className="App">
       <div className="three-by-six-grid">
         <div className="title">NAME THAT!</div>
-        {Array.from({ length: 12 }).map((_, idx) => (
+        <div className="picker">
+          <div></div>
+        </div>
+        <div className="image-display">
+          <img src="https://placehold.co/370x370" alt="placeholder" />
+        </div>
+        {Array.from({ length: 6 }).map((_, idx) => (
           <div key={idx} className="grid-item">
-            Item {idx + 1 + 6}
+            Item {idx + 1}
           </div>
         ))}
       </div>
