@@ -96,3 +96,11 @@ button:focus-visible {
 @media (min-width: calc(var(--bp-hd-max) + 1px)) {
   /* ultra-wide: adjust for extra space */
 }
+
+/* Full-height root to enable proper 1fr sizing */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
