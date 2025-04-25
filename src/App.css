@@ -72,7 +72,7 @@
 
 .picker-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr auto;
   grid-template-rows: auto auto auto;
   gap: 1rem; /* adjust spacing as needed */
   width: 100%;
