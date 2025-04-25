@@ -1,4 +1,6 @@
 import "./App.css";
+import { TbTriangleFilled } from "react-icons/tb";
+import { TbTriangleInvertedFilled } from "react-icons/tb";
 
 function App() {
   return (
@@ -6,7 +8,12 @@ function App() {
       <div className="main-layout-grid">
         <div className="title">NAME THAT!</div>
         <div className="picker picker-grid">
-          <div></div>
+          <div className="picker-button picker-button-up">
+            <TbTriangleFilled />
+          </div>
+          <div className="picker-button picker-button-down">
+            <TbTriangleInvertedFilled />
+          </div>
         </div>
         <div className="image-display">
           <img src="https://placehold.co/370x370" alt="placeholder" />

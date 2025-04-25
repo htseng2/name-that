@@ -77,3 +77,32 @@
   gap: 1rem; /* adjust spacing as needed */
   width: 100%;
 }
+
+.picker-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 40px;
+  background-color: #053b60;
+  border-radius: 12px;
+  color: #ffffff;
+  cursor: pointer;
+}
+.picker-button:active {
+  color: #fbd11e;
+}
+
+.picker-button-up {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  justify-self: center;
+  align-self: center;
+}
+
+.picker-button-down {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  justify-self: center;
+  align-self: center;
+}
