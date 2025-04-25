@@ -35,7 +35,7 @@
     2px 2px 0 #0e153c;
 }
 
-.three-by-six-grid {
+.main-layout-grid {
   display: grid;
   align-items: center;
   grid-template-rows: 54px 1fr 54px;
@@ -61,4 +61,19 @@
   object-fit: contain;
   object-position: center;
   display: block;
+}
+
+.picker {
+  grid-column: 1 / 4;
+  grid-row: 2;
+  justify-self: center;
+  align-self: center;
+}
+
+.picker-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto auto;
+  gap: 1rem; /* adjust spacing as needed */
+  width: 100%;
 }

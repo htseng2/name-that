@@ -3,9 +3,9 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <div className="three-by-six-grid">
+      <div className="main-layout-grid">
         <div className="title">NAME THAT!</div>
-        <div className="picker">
+        <div className="picker picker-grid">
           <div></div>
         </div>
         <div className="image-display">
