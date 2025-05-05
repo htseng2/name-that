@@ -37,14 +37,15 @@ function App() {
       <div className="main-layout-grid">
         <div className="title">NAME THAT!</div>
         <div className="picker picker-grid">
-          <div
+          <button
+            type="button"
             className="picker-button picker-button-up"
             onClick={() =>
               setStartIndex((prev) => Math.max(prev - pageSize, 0))
             }
           >
             <TbTriangleFilled />
-          </div>
+          </button>
           <div className="edition-options">
             {EDITION_OPTIONS.slice(startIndex, startIndex + pageSize).map(
               (option, idx) => (
@@ -56,13 +57,18 @@ function App() {
           </div>
           <div className="pagination-dots">
             {Array.from({ length: totalPages }).map((_, idx) => (
-              <GoDotFill
+              <button
                 key={idx}
+                type="button"
                 className={`dot${idx === activePage ? " active" : ""}`}
-              />
+                onClick={() => setStartIndex(idx * pageSize)}
+              >
+                <GoDotFill />
+              </button>
             ))}
           </div>
-          <div
+          <button
+            type="button"
             className="picker-button picker-button-down"
             onClick={() =>
               setStartIndex((prev) =>
@@ -71,18 +77,26 @@ function App() {
             }
           >
             <TbTriangleInvertedFilled />
-          </div>
+          </button>
         </div>
         <div className="image-display">
           <img src="https://placehold.co/370x370" alt="placeholder" />
         </div>
-        <div className="app-button app-button-info">
+        <button type="button" className="app-button app-button-info">
           <FaQuestion />
-        </div>
-        <div className="cta-button cta-button-start">START GAME</div>
-        <div className="app-button app-button-settings">
+        </button>
+        <button
+          type="button"
+          className="cta-button cta-button-start"
+          onClick={() => {
+            console.log("Game started!");
+          }}
+        >
+          START GAME
+        </button>
+        <button type="button" className="app-button app-button-settings">
           <FaGear />
-        </div>
+        </button>
       </div>
     </div>
   );
