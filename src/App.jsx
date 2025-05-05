@@ -3,6 +3,8 @@ import { TbTriangleFilled } from "react-icons/tb";
 import { TbTriangleInvertedFilled } from "react-icons/tb";
 import { useState } from "react";
 import { GoDotFill } from "react-icons/go";
+import { FaQuestion } from "react-icons/fa";
+import { FaGear } from "react-icons/fa6";
 
 const EDITION_OPTIONS = [
   "1980s Edition",
@@ -74,11 +76,12 @@ function App() {
         <div className="image-display">
           <img src="https://placehold.co/370x370" alt="placeholder" />
         </div>
-        {Array.from({ length: 6 }).map((_, idx) => (
-          <div key={idx} className="grid-item">
-            Item {idx + 1}
-          </div>
-        ))}
+        <div className="app-button app-button-info">
+          <FaQuestion />
+        </div>
+        <div className="app-button app-button-settings">
+          <FaGear />
+        </div>
       </div>
     </div>
   );
