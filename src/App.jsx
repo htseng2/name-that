@@ -38,7 +38,8 @@ function App() {
   const activePage = Math.floor(startIndex / pageSize);
   const [showInfo, setShowInfo] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [rounds, setRounds] = useState(1);
+  const [rounds, setRounds] = useState(4);
+  const [questionsPerRound, setQuestionsPerRound] = useState(10);
   return (
     <div className="App">
       <div className="main-layout-grid">
@@ -138,7 +139,24 @@ function App() {
                   onChange={setRounds}
                 />
               </div>
-              {/* Settings content goes here */}
+
+              <div className="settings-popup-content-item">
+                <div className="settings-popup-content-item-info">
+                  <div className="settings-popup-content-item-title">
+                    Questions Per Round
+                  </div>
+                  <div className="settings-popup-content-item-description">
+                    (Max = 10 Questions)
+                  </div>
+                </div>
+
+                <RoundSelector
+                  min={1}
+                  max={10}
+                  initial={questionsPerRound}
+                  onChange={setQuestionsPerRound}
+                />
+              </div>
             </div>
           </div>
         </div>
