@@ -6,6 +6,9 @@ import { GoDotFill } from "react-icons/go";
 import { FaQuestion } from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
+import { FaMinus } from "react-icons/fa";
+import RoundSelector from "./RoundSelector";
 
 const EDITION_OPTIONS = [
   "1980s Edition",
@@ -35,6 +38,7 @@ function App() {
   const activePage = Math.floor(startIndex / pageSize);
   const [showInfo, setShowInfo] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [rounds, setRounds] = useState(1);
   return (
     <div className="App">
       <div className="main-layout-grid">
@@ -123,12 +127,16 @@ function App() {
                     Rounds
                   </div>
                   <div className="settings-popup-content-item-description">
-                    Rounds (Max = 4 Rounds)
+                    (Max = 4 Rounds)
                   </div>
                 </div>
-                <div className="settings-popup-content-item-value">
-                  <input type="number" min="1" max="10" />
-                </div>
+
+                <RoundSelector
+                  min={1}
+                  max={4}
+                  initial={rounds}
+                  onChange={setRounds}
+                />
               </div>
               {/* Settings content goes here */}
             </div>

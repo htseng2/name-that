@@ -431,7 +431,7 @@ button::-moz-focus-inner {
 .settings-popup-content-item-description {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 100%;
   letter-spacing: 0%;
   color: #fbd11e;
@@ -441,7 +441,7 @@ button::-moz-focus-inner {
 .settings-popup-content-item {
   display: flex;
   width: 272px;
-  height: 36px;
+  min-height: 36px; /* allow multi-line description */
   justify-content: space-between;
   align-items: center;
 }
