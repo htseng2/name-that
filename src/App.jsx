@@ -34,6 +34,7 @@ function App() {
   const totalPages = Math.ceil(EDITION_OPTIONS.length / pageSize);
   const activePage = Math.floor(startIndex / pageSize);
   const [showInfo, setShowInfo] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
   return (
     <div className="App">
       <div className="main-layout-grid">
@@ -100,10 +101,21 @@ function App() {
         >
           START GAME
         </button>
-        <button type="button" className="app-button app-button-settings">
+        <button
+          type="button"
+          className="app-button app-button-settings"
+          onClick={() => setShowSettings(true)}
+        >
           <FaGear />
         </button>
       </div>
+      {showSettings && (
+        <div className="popup-overlay" onClick={() => setShowSettings(false)}>
+          <div className="settings-popup" onClick={(e) => e.stopPropagation()}>
+            {/* Settings content goes here */}
+          </div>
+        </div>
+      )}
       {showInfo && (
         <div className="popup-overlay" onClick={() => setShowInfo(false)}>
           <div className="info-popup" onClick={(e) => e.stopPropagation()}>

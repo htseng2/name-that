@@ -359,3 +359,22 @@ button::-moz-focus-inner {
 .info-popup-content ul li:last-child {
   margin-bottom: 0;
 }
+
+/* Settings popup panel anchored to the right */
+.settings-popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 752px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  background: #024d80;
+  border-top-left-radius: 32px;
+  border-bottom-left-radius: 32px;
+  border-right: 1px solid #00000026;
+  box-shadow: -2px 2px 23.1px 2px #00000026;
+  z-index: 1002;
+}
