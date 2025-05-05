@@ -400,3 +400,48 @@ button::-moz-focus-inner {
   opacity: 0.3;
   margin: 24px auto 0; /* 24px from title, centered horizontally */
 }
+
+/* Content container inside the settings popup */
+.settings-popup-content {
+  width: 272px;
+  height: 96px;
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Layout for settings popup content item info */
+.settings-popup-content-item-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Title text inside a settings content item */
+.settings-popup-content-item-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #ffffff;
+}
+
+/* Description text inside a settings content item */
+.settings-popup-content-item-description {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #fbd11e;
+}
+
+/* Container for each setting row */
+.settings-popup-content-item {
+  display: flex;
+  width: 272px;
+  height: 36px;
+  justify-content: space-between;
+  align-items: center;
+}

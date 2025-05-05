@@ -115,6 +115,21 @@ function App() {
             <div>
               <div className="settings-popup-title">Settings</div>
               <div className="settings-divider" />
+            </div>
+            <div className="settings-popup-content">
+              <div className="settings-popup-content-item">
+                <div className="settings-popup-content-item-info">
+                  <div className="settings-popup-content-item-title">
+                    Rounds
+                  </div>
+                  <div className="settings-popup-content-item-description">
+                    Rounds (Max = 4 Rounds)
+                  </div>
+                </div>
+                <div className="settings-popup-content-item-value">
+                  <input type="number" min="1" max="10" />
+                </div>
+              </div>
               {/* Settings content goes here */}
             </div>
           </div>
