@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
 
+html,
+body,
+button,
+input,
+textarea,
+select {
+  font-family: "Montserrat", sans-serif;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
 }
@@ -174,4 +183,29 @@ body {
   grid-column: 6/7;
   grid-row: 3;
   justify-self: end;
+}
+
+.cta-button {
+  width: 216px;
+  height: 50px;
+  padding: 12px 24px;
+  gap: 10px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #66ed18 -33.77%, #0e890e 107.78%);
+  box-shadow: 0px 4px 4px 0px #00000040;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.cta-button-start {
+  grid-column: 3 / 5;
+  grid-row: 3;
+  justify-self: center;
+  align-self: center;
 }

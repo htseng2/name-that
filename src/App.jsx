@@ -79,6 +79,7 @@ function App() {
         <div className="app-button app-button-info">
           <FaQuestion />
         </div>
+        <div className="cta-button cta-button-start">START GAME</div>
         <div className="app-button app-button-settings">
           <FaGear />
         </div>
