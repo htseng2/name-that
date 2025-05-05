@@ -377,4 +377,26 @@ button::-moz-focus-inner {
   border-right: 1px solid #00000026;
   box-shadow: -2px 2px 23.1px 2px #00000026;
   z-index: 1002;
+  align-items: center; /* center children horizontally */
+}
+
+/* Title inside the settings popup */
+.settings-popup-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: capitalize;
+  color: #ffffff;
+}
+
+/* Divider under settings title */
+.settings-divider {
+  width: 286px;
+  border-top: 1px solid #ffffff;
+  opacity: 0.3;
+  margin: 24px auto 0; /* 24px from title, centered horizontally */
 }

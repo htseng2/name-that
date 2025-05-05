@@ -112,7 +112,11 @@ function App() {
       {showSettings && (
         <div className="popup-overlay" onClick={() => setShowSettings(false)}>
           <div className="settings-popup" onClick={(e) => e.stopPropagation()}>
-            {/* Settings content goes here */}
+            <div>
+              <div className="settings-popup-title">Settings</div>
+              <div className="settings-divider" />
+              {/* Settings content goes here */}
+            </div>
           </div>
         </div>
       )}
