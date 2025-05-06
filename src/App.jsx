@@ -40,6 +40,7 @@ function App() {
   const [showSettings, setShowSettings] = useState(false);
   const [rounds, setRounds] = useState(4);
   const [questionsPerRound, setQuestionsPerRound] = useState(10);
+  const [selectedIndex, setSelectedIndex] = useState(null);
   return (
     <div className="App">
       <div className="main-layout-grid">
@@ -56,11 +57,20 @@ function App() {
           </button>
           <div className="edition-options">
             {EDITION_OPTIONS.slice(startIndex, startIndex + pageSize).map(
-              (option, idx) => (
-                <div key={startIndex + idx} className="edition-option">
-                  {option}
-                </div>
-              )
+              (option, idx) => {
+                const globalIdx = startIndex + idx;
+                return (
+                  <div
+                    key={globalIdx}
+                    className={`edition-option${
+                      selectedIndex === globalIdx ? " selected" : ""
+                    }`}
+                    onClick={() => setSelectedIndex(globalIdx)}
+                  >
+                    {option}
+                  </div>
+                );
+              }
             )}
           </div>
           <div className="pagination-dots">

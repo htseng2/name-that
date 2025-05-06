@@ -165,6 +165,12 @@ body {
   color: #fbd11e;
 }
 
+/* Add selected state style */
+.edition-option.selected {
+  background: #053b60;
+  color: #fbd11e;
+}
+
 .app-button {
   background: linear-gradient(180deg, #a2d5ec 0%, #6a99ae 100%);
   box-shadow: 0px 5.6px 5.6px 0px #00000040;
