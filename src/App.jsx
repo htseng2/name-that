@@ -10,6 +10,7 @@ import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import RoundSelector from "./RoundSelector";
 import GameFlow from "./game/GameFlow";
+import Logo from "./game/Logo";
 import edition1980s from "./assets/editions/edition-1980s.webp";
 import edition1990s from "./assets/editions/edition-1990s.webp";
 import editionChristmas from "./assets/editions/edition-christmas.webp";
@@ -66,7 +67,7 @@ function App() {
   return (
     <div className="App">
       <div className="main-layout-grid">
-        <div className="title">NAME THAT!</div>
+        <Logo />
         <div className="picker picker-grid">
           <button
             type="button"
