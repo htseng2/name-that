@@ -9,6 +9,7 @@ import { FaTimes } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import RoundSelector from "./RoundSelector";
+import GameFlow from "./game/GameFlow";
 import edition1980s from "./assets/editions/edition-1980s.webp";
 import edition1990s from "./assets/editions/edition-1990s.webp";
 import editionChristmas from "./assets/editions/edition-christmas.webp";
@@ -48,8 +49,12 @@ function App() {
   const [rounds, setRounds] = useState(4);
   const [questionsPerRound, setQuestionsPerRound] = useState(10);
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const [gameStarted, setGameStarted] = useState(false);
   const isStartDisabled =
     selectedIndex === null || !EDITION_OPTIONS[selectedIndex]?.img;
+  if (gameStarted) {
+    return <GameFlow />;
+  }
   return (
     <div className="App">
       <div className="main-layout-grid">
@@ -124,7 +129,7 @@ function App() {
           className="cta-button cta-button-start"
           disabled={isStartDisabled}
           onClick={() => {
-            if (!isStartDisabled) console.log("Game started!");
+            if (!isStartDisabled) setGameStarted(true);
           }}
         >
           START GAME
