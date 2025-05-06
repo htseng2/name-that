@@ -48,6 +48,8 @@ function App() {
   const [rounds, setRounds] = useState(4);
   const [questionsPerRound, setQuestionsPerRound] = useState(10);
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const isStartDisabled =
+    selectedIndex === null || !EDITION_OPTIONS[selectedIndex]?.img;
   return (
     <div className="App">
       <div className="main-layout-grid">
@@ -120,8 +122,9 @@ function App() {
         <button
           type="button"
           className="cta-button cta-button-start"
+          disabled={isStartDisabled}
           onClick={() => {
-            console.log("Game started!");
+            if (!isStartDisabled) console.log("Game started!");
           }}
         >
           START GAME

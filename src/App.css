@@ -228,6 +228,13 @@ body {
   align-self: center;
 }
 
+/* Style disabled state of START GAME button */
+.cta-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 /* Reset default button styles so icons retain their intended size */
 button {
   -webkit-appearance: none;
