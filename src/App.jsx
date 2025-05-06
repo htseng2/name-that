@@ -46,6 +46,7 @@ function App() {
   const activePage = Math.floor(startIndex / pageSize);
   const [showInfo, setShowInfo] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [closingSettings, setClosingSettings] = useState(false);
   const [rounds, setRounds] = useState(4);
   const [questionsPerRound, setQuestionsPerRound] = useState(10);
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -55,6 +56,13 @@ function App() {
   if (gameStarted) {
     return <GameFlow />;
   }
+  const handleCloseSettings = () => {
+    setClosingSettings(true);
+    setTimeout(() => {
+      setShowSettings(false);
+      setClosingSettings(false);
+    }, 300);
+  };
   return (
     <div className="App">
       <div className="main-layout-grid">
@@ -137,14 +145,20 @@ function App() {
         <button
           type="button"
           className="app-button app-button-settings"
-          onClick={() => setShowSettings(true)}
+          onClick={() => {
+            setShowSettings(true);
+            setClosingSettings(false);
+          }}
         >
           <FaGear />
         </button>
       </div>
       {showSettings && (
-        <div className="popup-overlay" onClick={() => setShowSettings(false)}>
-          <div className="settings-popup" onClick={(e) => e.stopPropagation()}>
+        <div className="popup-overlay" onClick={handleCloseSettings}>
+          <div
+            className={`settings-popup${closingSettings ? " slide-out" : ""}`}
+            onClick={(e) => e.stopPropagation()}
+          >
             <div>
               <div className="settings-popup-title">Settings</div>
               <div className="settings-divider" />
