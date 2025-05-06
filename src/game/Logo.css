@@ -1,12 +1,11 @@
 .logo {
   display: inline-block;
-  grid-column: 1 / -1;
-  grid-row: 1;
-  justify-self: center;
+  width: 100%; /* fill available parent width */
+  /* fluid font-size: scales with viewport, clamped between 48px and 120px */
+  font-size: clamp(48px, 10vw, 120px);
   font-family: "Shrikhand";
   font-weight: 400;
   font-style: italic;
-  font-size: 84px;
   line-height: 100%;
   letter-spacing: 0%;
   text-align: center;
