@@ -1,13 +1,9 @@
 import "./App.css";
-import { TbTriangleFilled } from "react-icons/tb";
-import { TbTriangleInvertedFilled } from "react-icons/tb";
+import Picker from "./components/Picker";
 import { useState } from "react";
-import { GoDotFill } from "react-icons/go";
 import { FaQuestion } from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa";
-import { FaMinus } from "react-icons/fa";
 import RoundSelector from "./components/RoundSelector";
 import Logo from "./components/Logo";
 import edition1980s from "./assets/editions/edition-1980s.webp";
@@ -41,9 +37,6 @@ const EDITION_OPTIONS = [
 
 function App() {
   const pageSize = 6;
-  const [startIndex, setStartIndex] = useState(0);
-  const totalPages = Math.ceil(EDITION_OPTIONS.length / pageSize);
-  const activePage = Math.floor(startIndex / pageSize);
   const [showInfo, setShowInfo] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [closingSettings, setClosingSettings] = useState(false);
@@ -64,58 +57,12 @@ function App() {
     <div className="App">
       <div className="main-layout-grid">
         <Logo />
-        <div className="picker picker-grid">
-          <button
-            type="button"
-            className="picker-button picker-button-up"
-            onClick={() =>
-              setStartIndex((prev) => Math.max(prev - pageSize, 0))
-            }
-          >
-            <TbTriangleFilled />
-          </button>
-          <div className="edition-options">
-            {EDITION_OPTIONS.slice(startIndex, startIndex + pageSize).map(
-              (option, idx) => {
-                const globalIdx = startIndex + idx;
-                return (
-                  <div
-                    key={globalIdx}
-                    className={`edition-option${
-                      selectedIndex === globalIdx ? " selected" : ""
-                    }`}
-                    onClick={() => setSelectedIndex(globalIdx)}
-                  >
-                    {option.title}
-                  </div>
-                );
-              }
-            )}
-          </div>
-          <div className="pagination-dots">
-            {Array.from({ length: totalPages }).map((_, idx) => (
-              <button
-                key={idx}
-                type="button"
-                className={`dot${idx === activePage ? " active" : ""}`}
-                onClick={() => setStartIndex(idx * pageSize)}
-              >
-                <GoDotFill />
-              </button>
-            ))}
-          </div>
-          <button
-            type="button"
-            className="picker-button picker-button-down"
-            onClick={() =>
-              setStartIndex((prev) =>
-                Math.min(prev + pageSize, (totalPages - 1) * pageSize)
-              )
-            }
-          >
-            <TbTriangleInvertedFilled />
-          </button>
-        </div>
+        <Picker
+          options={EDITION_OPTIONS}
+          selectedIndex={selectedIndex}
+          onSelect={setSelectedIndex}
+          pageSize={pageSize}
+        />
         <div className="image-display">
           <img
             src={EDITION_OPTIONS[selectedIndex]?.img ?? notAvailable}
