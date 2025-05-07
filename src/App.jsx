@@ -7,7 +7,7 @@ import { FaTimes } from "react-icons/fa";
 import RoundSelector from "./components/RoundSelector";
 import Logo from "./components/Logo";
 import { EDITION_OPTIONS } from "./constants";
-import notAvailable from "./assets/editions/not-available.webp";
+import EditionDisplay from "./components/EditionDisplay";
 
 function App() {
   const pageSize = 6;
@@ -37,12 +37,7 @@ function App() {
           onSelect={setSelectedIndex}
           pageSize={pageSize}
         />
-        <div className="image-display">
-          <img
-            src={EDITION_OPTIONS[selectedIndex]?.img ?? notAvailable}
-            alt={EDITION_OPTIONS[selectedIndex]?.title || "placeholder"}
-          />
-        </div>
+        <EditionDisplay edition={EDITION_OPTIONS[selectedIndex]} />
         <button
           type="button"
           className="app-button app-button-info"
