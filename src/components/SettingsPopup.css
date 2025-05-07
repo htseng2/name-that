@@ -1,0 +1,101 @@
+.settings-popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 752px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  background: #024d80;
+  border-top-left-radius: 32px;
+  border-bottom-left-radius: 32px;
+  border-right: 1px solid #00000026;
+  box-shadow: -2px 2px 23.1px 2px #00000026;
+  z-index: 1002;
+  align-items: center;
+  transform: translateX(100%);
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.settings-popup-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: capitalize;
+  color: #ffffff;
+}
+
+.settings-divider {
+  width: 286px;
+  border-top: 1px solid #ffffff;
+  opacity: 0.3;
+  margin: 24px auto 0;
+}
+
+.settings-popup-content {
+  width: 272px;
+  height: 96px;
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-popup-content-item-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.settings-popup-content-item-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #ffffff;
+}
+
+.settings-popup-content-item-description {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #fbd11e;
+}
+
+.settings-popup-content-item {
+  display: flex;
+  width: 272px;
+  min-height: 36px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.settings-popup.slide-out {
+  animation: slideOut 0.3s ease-in forwards;
+}

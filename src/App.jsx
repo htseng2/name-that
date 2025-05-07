@@ -8,25 +8,19 @@ import RoundSelector from "./components/RoundSelector";
 import Logo from "./components/Logo";
 import { EDITION_OPTIONS } from "./constants";
 import EditionDisplay from "./components/EditionDisplay";
+import SettingsPopup from "./components/SettingsPopup";
 
 function App() {
   const pageSize = 6;
   const [showInfo, setShowInfo] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [closingSettings, setClosingSettings] = useState(false);
   const [rounds, setRounds] = useState(4);
   const [questionsPerRound, setQuestionsPerRound] = useState(10);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [_gameStarted, setGameStarted] = useState(false);
   const isStartDisabled =
     selectedIndex === null || !EDITION_OPTIONS[selectedIndex]?.img;
-  const handleCloseSettings = () => {
-    setClosingSettings(true);
-    setTimeout(() => {
-      setShowSettings(false);
-      setClosingSettings(false);
-    }, 300);
-  };
+
   return (
     <div className="App">
       <div className="main-layout-grid">
@@ -58,63 +52,19 @@ function App() {
         <button
           type="button"
           className="app-button app-button-settings"
-          onClick={() => {
-            setShowSettings(true);
-            setClosingSettings(false);
-          }}
+          onClick={() => setShowSettings(true)}
         >
           <FaGear />
         </button>
       </div>
       {showSettings && (
-        <div className="popup-overlay" onClick={handleCloseSettings}>
-          <div
-            className={`settings-popup${closingSettings ? " slide-out" : ""}`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div>
-              <div className="settings-popup-title">Settings</div>
-              <div className="settings-divider" />
-            </div>
-            <div className="settings-popup-content">
-              <div className="settings-popup-content-item">
-                <div className="settings-popup-content-item-info">
-                  <div className="settings-popup-content-item-title">
-                    Rounds
-                  </div>
-                  <div className="settings-popup-content-item-description">
-                    (Max = 4 Rounds)
-                  </div>
-                </div>
-
-                <RoundSelector
-                  min={1}
-                  max={4}
-                  initial={rounds}
-                  onChange={setRounds}
-                />
-              </div>
-
-              <div className="settings-popup-content-item">
-                <div className="settings-popup-content-item-info">
-                  <div className="settings-popup-content-item-title">
-                    Questions Per Round
-                  </div>
-                  <div className="settings-popup-content-item-description">
-                    (Max = 10 Questions)
-                  </div>
-                </div>
-
-                <RoundSelector
-                  min={1}
-                  max={10}
-                  initial={questionsPerRound}
-                  onChange={setQuestionsPerRound}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+        <SettingsPopup
+          rounds={rounds}
+          questionsPerRound={questionsPerRound}
+          onChangeRounds={setRounds}
+          onChangeQuestionsPerRound={setQuestionsPerRound}
+          onClose={() => setShowSettings(false)}
+        />
       )}
       {showInfo && (
         <div className="popup-overlay" onClick={() => setShowInfo(false)}>
