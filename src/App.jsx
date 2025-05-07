@@ -1,5 +1,5 @@
 import "./App.css";
-import Picker from "./components/Picker";
+import EditionPicker from "./components/EditionPicker";
 import { useState } from "react";
 import { FaQuestion } from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";
@@ -57,7 +57,7 @@ function App() {
     <div className="App">
       <div className="main-layout-grid">
         <Logo />
-        <Picker
+        <EditionPicker
           options={EDITION_OPTIONS}
           selectedIndex={selectedIndex}
           onSelect={setSelectedIndex}

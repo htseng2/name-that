@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { TbTriangleFilled, TbTriangleInvertedFilled } from "react-icons/tb";
 import { GoDotFill } from "react-icons/go";
-import "./Picker.css";
+import "./EditionPicker.css";
 
-function Picker({ options, selectedIndex, onSelect, pageSize = 6 }) {
+function EditionPicker({ options, selectedIndex, onSelect, pageSize = 6 }) {
   const [startIndex, setStartIndex] = useState(0);
   const totalPages = Math.ceil(options.length / pageSize);
   const activePage = Math.floor(startIndex / pageSize);
@@ -60,4 +60,4 @@ function Picker({ options, selectedIndex, onSelect, pageSize = 6 }) {
   );
 }
 
-export default Picker;
+export default EditionPicker;
