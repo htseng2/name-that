@@ -8,9 +8,8 @@ import { FaGear } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
-import RoundSelector from "./RoundSelector";
-import GameFlow from "./game/GameFlow";
-import Logo from "./game/Logo";
+import RoundSelector from "./components/RoundSelector";
+import Logo from "./components/Logo";
 import edition1980s from "./assets/editions/edition-1980s.webp";
 import edition1990s from "./assets/editions/edition-1990s.webp";
 import editionChristmas from "./assets/editions/edition-christmas.webp";
@@ -51,12 +50,9 @@ function App() {
   const [rounds, setRounds] = useState(4);
   const [questionsPerRound, setQuestionsPerRound] = useState(10);
   const [selectedIndex, setSelectedIndex] = useState(null);
-  const [gameStarted, setGameStarted] = useState(false);
+  const [_gameStarted, setGameStarted] = useState(false);
   const isStartDisabled =
     selectedIndex === null || !EDITION_OPTIONS[selectedIndex]?.img;
-  if (gameStarted) {
-    return <GameFlow />;
-  }
   const handleCloseSettings = () => {
     setClosingSettings(true);
     setTimeout(() => {
