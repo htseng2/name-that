@@ -4,7 +4,6 @@ import { useState } from "react";
 import { FaQuestion } from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
-import RoundSelector from "./components/RoundSelector";
 import Logo from "./components/Logo";
 import { EDITION_OPTIONS } from "./constants";
 import EditionDisplay from "./components/EditionDisplay";
