@@ -1,73 +1,73 @@
 import "./App.css";
-import EditionPicker from "./components/EditionPicker";
+import StartMenu from "./screens/StartMenu";
+import RoundIntro from "./screens/RoundIntro";
+import QuestionScreen from "./screens/QuestionScreen";
+import RevealScreen from "./screens/RevealScreen";
+import GameOverScreen from "./screens/GameOverScreen";
 import { useState } from "react";
-import { FaQuestion } from "react-icons/fa";
-import { FaGear } from "react-icons/fa6";
-import InfoPopup from "./components/InfoPopup";
-import Logo from "./components/Logo";
-import { EDITION_OPTIONS } from "./constants";
-import EditionDisplay from "./components/EditionDisplay";
-import SettingsPopup from "./components/SettingsPopup";
 
 function App() {
-  const pageSize = 6;
-  const [showInfo, setShowInfo] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
-  const [rounds, setRounds] = useState(4);
-  const [questionsPerRound, setQuestionsPerRound] = useState(10);
-  const [selectedIndex, setSelectedIndex] = useState(null);
-  const [_gameStarted, setGameStarted] = useState(false);
-  const isStartDisabled =
-    selectedIndex === null || !EDITION_OPTIONS[selectedIndex]?.img;
+  const [screen, setScreen] = useState("start");
+  const [round, setRound] = useState(1);
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [settings, setSettings] = useState({
+    rounds: 4,
+    questionsPerRound: 10,
+  });
+  const [_selectedEditionIndex, setSelectedEditionIndex] = useState(null);
 
-  return (
-    <div className="App">
-      <div className="main-layout-grid">
-        <Logo />
-        <EditionPicker
-          options={EDITION_OPTIONS}
-          selectedIndex={selectedIndex}
-          onSelect={setSelectedIndex}
-          pageSize={pageSize}
-        />
-        <EditionDisplay edition={EDITION_OPTIONS[selectedIndex]} />
-        <button
-          type="button"
-          className="app-button app-button-info"
-          onClick={() => setShowInfo(true)}
-        >
-          <FaQuestion />
-        </button>
-        <button
-          type="button"
-          className="cta-button cta-button-start"
-          disabled={isStartDisabled}
-          onClick={() => {
-            if (!isStartDisabled) setGameStarted(true);
-          }}
-        >
-          START GAME
-        </button>
-        <button
-          type="button"
-          className="app-button app-button-settings"
-          onClick={() => setShowSettings(true)}
-        >
-          <FaGear />
-        </button>
-      </div>
-      {showSettings && (
-        <SettingsPopup
-          rounds={rounds}
-          questionsPerRound={questionsPerRound}
-          onChangeRounds={setRounds}
-          onChangeQuestionsPerRound={setQuestionsPerRound}
-          onClose={() => setShowSettings(false)}
-        />
-      )}
-      {showInfo && <InfoPopup onClose={() => setShowInfo(false)} />}
-    </div>
-  );
+  const goTo = (next) => setScreen(next);
+
+  const handleStart = ({ rounds, questionsPerRound, selectedIndex }) => {
+    setSettings({ rounds, questionsPerRound });
+    setSelectedEditionIndex(selectedIndex);
+    setRound(1);
+    setQuestionIndex(0);
+    goTo("intro");
+  };
+
+  const handleRevealNext = () => {
+    if (round < settings.rounds) {
+      setRound(round + 1);
+      setQuestionIndex(0);
+      goTo("intro");
+    } else {
+      goTo("over");
+    }
+  };
+
+  const handleAnswer = () => {
+    if (questionIndex + 1 < settings.questionsPerRound) {
+      setQuestionIndex(questionIndex + 1);
+      goTo("question");
+    } else {
+      goTo("reveal");
+    }
+  };
+
+  const renderScreen = () => {
+    switch (screen) {
+      case "start":
+        return <StartMenu onStart={handleStart} />;
+      case "intro":
+        return <RoundIntro round={round} onNext={() => goTo("question")} />;
+      case "question":
+        return (
+          <QuestionScreen
+            questionIndex={questionIndex}
+            onAnswer={handleAnswer}
+          />
+        );
+      case "reveal":
+        return <RevealScreen round={round} onNext={handleRevealNext} />;
+      case "over":
+        return <GameOverScreen onRestart={() => goTo("start")} />;
+      default:
+        return null;
+    }
+  };
+
+  return <div className="App">{renderScreen()}</div>;
 }
 
 export default App;
