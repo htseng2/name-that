@@ -11,8 +11,8 @@ function App() {
   const [round, setRound] = useState(1);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [settings, setSettings] = useState({
-    rounds: 4,
-    questionsPerRound: 10,
+    rounds: 2,
+    questionsPerRound: 2,
   });
   const [_selectedEditionIndex, setSelectedEditionIndex] = useState(null);
 
@@ -48,7 +48,17 @@ function App() {
   const renderScreen = () => {
     switch (screen) {
       case "start":
-        return <StartMenu onStart={handleStart} />;
+        return (
+          <StartMenu
+            rounds={settings.rounds}
+            questionsPerRound={settings.questionsPerRound}
+            onChangeRounds={(r) => setSettings((s) => ({ ...s, rounds: r }))}
+            onChangeQuestionsPerRound={(q) =>
+              setSettings((s) => ({ ...s, questionsPerRound: q }))
+            }
+            onStart={handleStart}
+          />
+        );
       case "intro":
         return <RoundIntro round={round} onNext={() => goTo("question")} />;
       case "question":

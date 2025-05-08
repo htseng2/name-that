@@ -8,12 +8,16 @@ import SettingsPopup from "../components/SettingsPopup";
 import InfoPopup from "../components/InfoPopup";
 import { EDITION_OPTIONS } from "../constants";
 
-function StartMenu({ onStart }) {
+function StartMenu({
+  onStart,
+  rounds,
+  questionsPerRound,
+  onChangeRounds,
+  onChangeQuestionsPerRound,
+}) {
   const pageSize = 6;
   const [showInfo, setShowInfo] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [rounds, setRounds] = useState(4);
-  const [questionsPerRound, setQuestionsPerRound] = useState(10);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   const isStartDisabled =
@@ -63,8 +67,8 @@ function StartMenu({ onStart }) {
         <SettingsPopup
           rounds={rounds}
           questionsPerRound={questionsPerRound}
-          onChangeRounds={setRounds}
-          onChangeQuestionsPerRound={setQuestionsPerRound}
+          onChangeRounds={onChangeRounds}
+          onChangeQuestionsPerRound={onChangeQuestionsPerRound}
           onClose={() => setShowSettings(false)}
         />
       )}
