@@ -1,7 +1,8 @@
 .logo {
+  --logo-height: 54px; /* Define a variable for height and font scaling */
   /* fixed parent container for consistent sizing */
   width: 492px;
-  height: 54px;
+  height: var(--logo-height); /* Use the variable */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,15 +15,18 @@
   font-weight: 400;
   font-style: italic;
   /* retain original text styling */
-  font-size: 84px;
+  font-size: var(--logo-height); /* Scale font size with height */
   line-height: 100%;
   letter-spacing: 0%;
   text-align: center;
   vertical-align: middle;
   text-transform: uppercase;
   color: #fbd11e;
-  -webkit-text-stroke: 4px #0e153c;
+  /* -webkit-text-stroke: 4px #0e153c; */ /* Old fixed stroke */
+  -webkit-text-stroke: 0.0476em #0e153c; /* Approx 4/84, scales with font-size */
   -webkit-text-fill-color: #fbd11e;
-  text-shadow: -2px -2px 0 #0e153c, 2px -2px 0 #0e153c, -2px 2px 0 #0e153c,
-    2px 2px 0 #0e153c;
+  /* text-shadow: -2px -2px 0 #0e153c, 2px -2px 0 #0e153c, -2px 2px 0 #0e153c,
+    2px 2px 0 #0e153c; */ /* Old fixed shadow */
+  text-shadow: -0.0238em -0.0238em 0 #0e153c, 0.0238em -0.0238em 0 #0e153c,
+    -0.0238em 0.0238em 0 #0e153c, 0.0238em 0.0238em 0 #0e153c; /* Approx 2/84, scales with font-size */
 }
