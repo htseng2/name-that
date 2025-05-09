@@ -15,8 +15,14 @@ function App() {
     questionsPerRound: 2,
   });
   const [_selectedEditionIndex, setSelectedEditionIndex] = useState(null);
+  const [roundIntroKey, setRoundIntroKey] = useState(0);
 
-  const goTo = (next) => setScreen(next);
+  const goTo = (next) => {
+    if (next === "intro") {
+      setRoundIntroKey((prevKey) => prevKey + 1);
+    }
+    setScreen(next);
+  };
 
   const handleStart = ({ rounds, questionsPerRound, selectedIndex }) => {
     setSettings({ rounds, questionsPerRound });
@@ -60,7 +66,13 @@ function App() {
           />
         );
       case "intro":
-        return <RoundIntro round={round} onNext={() => goTo("question")} />;
+        return (
+          <RoundIntro
+            key={roundIntroKey}
+            round={round}
+            onNext={() => goTo("question")}
+          />
+        );
       case "question":
         return (
           <QuestionScreen
