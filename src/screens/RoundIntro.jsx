@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../components/Logo";
 import "./RoundIntro.css";
+import NextButton from "../components/NextButton";
+
 // eslint-disable-next-line no-unused-vars
 import { useSpring, animated } from "react-spring";
 
 function RoundIntro({ round, onNext, questionsPerRound }) {
   const [logoAnimation, api] = useSpring(() => ({
-    opacity: 1,
+    opacity: 0,
     transform: "translateY(50vh) scale(1)",
     config: { tension: 120, friction: 14 },
   }));
@@ -22,27 +24,38 @@ function RoundIntro({ round, onNext, questionsPerRound }) {
     config: { duration: 500 },
   }));
 
+  // State to control when to show the NextButton
+  const [showNextButton, setShowNextButton] = useState(false);
+
   useEffect(() => {
     api.start({
       to: {
         opacity: 1,
         transform: "translateY(0px) scale(1)",
       },
+      onRest: () => {
+        // Animate the banner with a 500ms delay after the logo finishes
+        bannerApi.start({
+          to: { x: "0vw", opacity: 1 },
+          delay: 500,
+          onRest: () => {
+            // Fade in the questions text immediately after the banner finishes
+            questionsTextApi.start({
+              to: { opacity: 1 },
+              onRest: () => {
+                // Show the NextButton after all text animation finishes
+                setShowNextButton(true);
+              },
+            });
+          },
+        });
+      },
     });
-    // Animate the box after the logo animation completes (delay ~500ms)
-    const timeout = setTimeout(() => {
-      bannerApi.start({
-        to: { x: "0vw", opacity: 1 },
-        onRest: () => {
-          questionsTextApi.start({ to: { opacity: 1 } });
-        },
-      });
-    }, 500);
-    return () => clearTimeout(timeout);
   }, [api, bannerApi, questionsTextApi]);
 
   return (
     <div className="round-intro-screen">
+      <NextButton onClick={onNext} show={showNextButton} />
       <animated.div style={logoAnimation}>
         <Logo />
       </animated.div>
