@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../components/Logo";
 import "./RoundIntro.css";
-import NextButton from "../components/NextButton";
+import NavigationButton from "../components/NavigationButton";
 
 // eslint-disable-next-line no-unused-vars
 import { useSpring, animated } from "react-spring";
@@ -55,7 +55,12 @@ function RoundIntro({ round, onNext, questionsPerRound }) {
 
   return (
     <div className="round-intro-screen">
-      <NextButton onClick={onNext} show={showNextButton} />
+      <NavigationButton
+        onClick={onNext}
+        show={showNextButton}
+        direction="next"
+        label="Next Round"
+      />
       <animated.div style={logoAnimation}>
         <Logo />
       </animated.div>

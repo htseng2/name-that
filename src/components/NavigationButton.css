@@ -1,4 +1,5 @@
-.next-button-container {
+/* Base navigation button styles */
+.navigation-button {
   /* Button reset styles */
   background: none;
   border: none;
@@ -8,8 +9,6 @@
   outline: inherit;
 
   position: absolute;
-  top: 0;
-  right: 0;
   width: 76px;
   height: 72px;
   border-bottom-left-radius: 50px;
@@ -29,8 +28,35 @@
   transition: transform 0.15s ease;
 }
 
-/* Blink animation class applied after button appears */
-.next-button-container.blink {
+/* Position variants */
+.navigation-button.right {
+  top: 0;
+  right: 0;
+  border-bottom-left-radius: 50px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-top: 16px;
+  padding-right: 16px;
+  padding-bottom: 24px;
+  padding-left: 32px;
+}
+
+.navigation-button.left {
+  top: 0;
+  left: 0;
+  border-bottom-right-radius: 50px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding-top: 16px;
+  padding-right: 32px;
+  padding-bottom: 24px;
+  padding-left: 16px;
+}
+
+/* Blink animation */
+.navigation-button.blink {
   animation: buttonBlink 800ms ease-in-out infinite alternate;
 }
 
@@ -43,17 +69,18 @@
   }
 }
 
-.next-button-container svg {
+/* SVG icon styles */
+.navigation-button svg {
   width: 32px;
   height: 32px;
-  transform: rotate(90deg);
   pointer-events: none;
 }
 
-.next-button-container:hover {
+/* Hover and active states */
+.navigation-button:hover {
   transform: scale(1.05);
 }
 
-.next-button-container:active {
+.navigation-button:active {
   transform: scale(0.95);
 }

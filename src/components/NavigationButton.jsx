@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { TbTriangleFilled } from "react-icons/tb";
 import { useSpring, animated as Animated } from "react-spring";
-import "./NextButton.css";
+import "./NavigationButton.css";
 
-function NextButton({ onClick, show }) {
+function NavigationButton({
+  onClick,
+  show,
+  direction = "next", // "next" or "previous"
+  label,
+}) {
   const [animationStyle, api] = useSpring(() => ({
     opacity: 0,
     config: { duration: 300 },
@@ -22,17 +27,25 @@ function NextButton({ onClick, show }) {
     }
   }, [show, api]);
 
+  // Infer position from direction
+  const position = direction === "next" ? "right" : "left";
+
+  // Calculate rotation angle based on direction
+  const rotationAngle = direction === "next" ? 90 : -90;
+
   return (
     <Animated.button
       type="button"
-      className={`next-button-container${blinkActive ? " blink" : ""}`}
+      className={`navigation-button ${direction} ${position}${
+        blinkActive ? " blink" : ""
+      }`}
       onClick={onClick}
       style={animationStyle}
-      aria-label="Next"
+      aria-label={label || (direction === "next" ? "Next" : "Previous")}
     >
-      <TbTriangleFilled />
+      <TbTriangleFilled style={{ transform: `rotate(${rotationAngle}deg)` }} />
     </Animated.button>
   );
 }
 
-export default NextButton;
+export default NavigationButton;
