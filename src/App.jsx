@@ -70,6 +70,7 @@ function App() {
           <RoundIntro
             key={roundIntroKey}
             round={round}
+            questionsPerRound={settings.questionsPerRound}
             onNext={() => goTo("question")}
           />
         );
