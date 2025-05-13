@@ -26,6 +26,7 @@
   justify-content: center;
   cursor: pointer;
   transition: transform 0.15s ease;
+  box-sizing: border-box;
 }
 
 /* Position variants */
@@ -73,7 +74,6 @@
 .navigation-button svg {
   width: 32px;
   height: 32px;
-  pointer-events: none;
 }
 
 /* Hover and active states */

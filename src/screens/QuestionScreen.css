@@ -59,4 +59,79 @@
   margin-left: auto; /* Centers horizontally within the parent */
   margin-right: auto; /* Centers horizontally within the parent */
   /* This will result in 61px on each side if parent is 975px wide */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 31px;
+  padding-bottom: 31px;
+  box-sizing: border-box;
+}
+
+.question-visual-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.play-button {
+  width: 60px;
+  height: 60px;
+  background: #ffffff;
+  border-radius: 50%; /* Makes it a circle */
+  margin-top: 33px;
+  margin-left: auto; /* Center horizontally */
+  margin-right: auto; /* Center horizontally */
+  display: flex; /* Keep for centering the icon inside */
+  align-items: center; /* Keep for centering the icon inside */
+  justify-content: center; /* Keep for centering the icon inside */
+  border: none; /* Remove default button border */
+  padding: 0; /* Remove default button padding */
+  cursor: pointer; /* Indicate it's clickable */
+  /* Position button below the visual placeholder */
+  /* align-self: center; /* No longer needed as parent is not flex */
+}
+
+.play-button img {
+  width: 22px; /* 60px button - 19px padding each side = 22px */
+  height: 22px;
+  object-fit: contain;
+}
+
+.play-bar-container {
+  display: flex;
+  align-items: center;
+  width: 80%; /* Adjust as needed */
+  margin: 25px auto 0 auto; /* 25px top margin, centered horizontally */
+}
+
+.current-time,
+.total-duration {
+  color: #b0b0b0; /* Light grey for time text */
+  font-family: Montserrat, sans-serif; /* Consistent font */
+  font-size: 22px; /* Adjust as needed */
+  font-weight: 500;
+}
+
+.current-time {
+  margin-right: 15px;
+}
+
+.total-duration {
+  margin-left: 15px;
+}
+
+.progress-bar-background {
+  flex-grow: 1; /* Allows progress bar to fill available space */
+  height: 12px;
+  background-color: #3a3a3a; /* Dark grey for the track */
+  border-radius: 6px; /* Rounded ends for the track */
+  overflow: hidden; /* Ensures inner elapsed bar conforms to rounded corners */
+  position: relative; /* For potential future use with a draggable thumb */
+}
+
+.progress-bar-elapsed {
+  height: 100%;
+  width: 60%; /* Example: 60% progress, make this dynamic with JS */
+  background-color: #e0e0e0; /* Light grey/white for elapsed portion */
+  border-radius: 6px; /* Rounded ends for the elapsed portion */
 }

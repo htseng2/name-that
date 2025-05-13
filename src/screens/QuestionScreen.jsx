@@ -1,6 +1,8 @@
 import React from "react";
 import NavigationButton from "../components/NavigationButton";
 import "./QuestionScreen.css";
+import questionMark from "../assets/question-mark.webp";
+import play from "../assets/play.webp";
 
 function QuestionScreen({ round, questionIndex, onNext, onPrevious }) {
   return (
@@ -24,7 +26,19 @@ function QuestionScreen({ round, questionIndex, onNext, onPrevious }) {
         </div>
       </div>
       <div className="music-player-container">
-        <div className="question-visual-placeholder"></div>
+        <div className="question-visual-placeholder">
+          <img src={questionMark} alt="Question Mark" />
+        </div>
+        <button className="play-button">
+          <img src={play} alt="Play" />
+        </button>
+        <div className="play-bar-container">
+          <span className="current-time">0:00</span>
+          <div className="progress-bar-background">
+            <div className="progress-bar-elapsed"></div>
+          </div>
+          <span className="total-duration">0:00</span>
+        </div>
       </div>
     </div>
   );
