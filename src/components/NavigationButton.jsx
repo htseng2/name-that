@@ -8,6 +8,7 @@ function NavigationButton({
   show,
   direction = "next", // "next" or "previous"
   label,
+  shouldBlink = false, // New prop to control blinking
 }) {
   const [animationStyle, api] = useSpring(() => ({
     opacity: 0,
@@ -21,11 +22,13 @@ function NavigationButton({
         to: { opacity: 1 },
         delay: 500,
         onRest: () => {
-          setBlinkActive(true);
+          if (shouldBlink) {
+            setBlinkActive(true); // Only activate blink if prop is true
+          }
         },
       });
     }
-  }, [show, api]);
+  }, [show, api, shouldBlink]); // Add shouldBlink to dependency array
 
   // Infer position from direction
   const position = direction === "next" ? "right" : "left";

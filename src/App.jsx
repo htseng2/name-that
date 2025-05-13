@@ -51,6 +51,15 @@ function App() {
     }
   };
 
+  const handlePreviousQuestion = () => {
+    if (questionIndex > 0) {
+      setQuestionIndex(questionIndex - 1);
+      goTo("question");
+    } else {
+      goTo("intro");
+    }
+  };
+
   const renderScreen = () => {
     switch (screen) {
       case "start":
@@ -79,6 +88,7 @@ function App() {
           <QuestionScreen
             questionIndex={questionIndex}
             onAnswer={handleAnswer}
+            onPrevious={handlePreviousQuestion}
           />
         );
       case "reveal":

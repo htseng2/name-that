@@ -60,14 +60,11 @@ function RoundIntro({ round, onNext, questionsPerRound }) {
         show={showNextButton}
         direction="next"
         label="Next Round"
+        shouldBlink={true}
       />
       <animated.div style={logoAnimation}>
         <Logo />
       </animated.div>
-      <h2>Round {round}</h2>
-      <button type="button" onClick={onNext}>
-        Start Round
-      </button>
       <animated.div
         className="round-banner"
         style={{
