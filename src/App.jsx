@@ -42,7 +42,7 @@ function App() {
     }
   };
 
-  const handleAnswer = () => {
+  const handleQuestionNext = () => {
     if (questionIndex + 1 < settings.questionsPerRound) {
       setQuestionIndex(questionIndex + 1);
       goTo("question");
@@ -86,8 +86,9 @@ function App() {
       case "question":
         return (
           <QuestionScreen
+            round={round}
             questionIndex={questionIndex}
-            onAnswer={handleAnswer}
+            onNext={handleQuestionNext}
             onPrevious={handlePreviousQuestion}
           />
         );
