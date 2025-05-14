@@ -74,7 +74,6 @@
 }
 
 .play-controls-container {
-  /* New rule */
   margin-top: 33px;
   margin-left: 61px;
   margin-right: 61px;
@@ -82,9 +81,6 @@
   justify-content: center;
   align-items: center;
   position: relative; /* For future volume control positioning */
-  /* The width of this container will naturally be dictated by its content 
-     or can be set explicitly if needed later for volume control placement */
-  gap: 20px; /* Adds space between play button and volume control */
 }
 
 .play-button {
@@ -92,17 +88,12 @@
   height: 60px;
   background: #ffffff;
   border-radius: 50%; /* Makes it a circle */
-  /* margin-top: 33px; <-- Removed, moved to parent */
-  margin-left: auto; /* Keep for centering if parent doesn't handle it, or remove if redundant */
-  margin-right: auto; /* Keep for centering if parent doesn't handle it, or remove if redundant */
   display: flex; /* Keep for centering the icon inside */
   align-items: center; /* Keep for centering the icon inside */
   justify-content: center; /* Keep for centering the icon inside */
   border: none; /* Remove default button border */
   padding: 0; /* Remove default button padding */
   cursor: pointer; /* Indicate it's clickable */
-  /* Position button below the visual placeholder */
-  /* align-self: center; /* No longer needed as parent is not flex */
 }
 
 .play-button img {
@@ -147,6 +138,9 @@
 
 /* Volume Control Styles */
 .volume-bar-container {
+  position: absolute; /* Positioned relative to play-controls-container */
+  top: 0;
+  right: 0px;
   display: flex;
   align-items: center;
   gap: 8px; /* Space between icon and bar */
