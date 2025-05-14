@@ -73,14 +73,28 @@
   object-fit: contain;
 }
 
+.play-controls-container {
+  /* New rule */
+  margin-top: 33px;
+  margin-left: 61px;
+  margin-right: 61px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* For future volume control positioning */
+  /* The width of this container will naturally be dictated by its content 
+     or can be set explicitly if needed later for volume control placement */
+  gap: 20px; /* Adds space between play button and volume control */
+}
+
 .play-button {
   width: 60px;
   height: 60px;
   background: #ffffff;
   border-radius: 50%; /* Makes it a circle */
-  margin-top: 33px;
-  margin-left: auto; /* Center horizontally */
-  margin-right: auto; /* Center horizontally */
+  /* margin-top: 33px; <-- Removed, moved to parent */
+  margin-left: auto; /* Keep for centering if parent doesn't handle it, or remove if redundant */
+  margin-right: auto; /* Keep for centering if parent doesn't handle it, or remove if redundant */
   display: flex; /* Keep for centering the icon inside */
   align-items: center; /* Keep for centering the icon inside */
   justify-content: center; /* Keep for centering the icon inside */
@@ -129,4 +143,34 @@
   width: 60%; /* Example: 60% progress, make this dynamic with JS */
   background-color: #eeecec; /* Light grey/white for elapsed portion */
   border-radius: 12px; /* Rounded ends for the elapsed portion */
+}
+
+/* Volume Control Styles */
+.volume-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and bar */
+}
+
+.volume-bar-container img {
+  width: 24px; /* Adjust size as needed */
+  height: 24px;
+  cursor: pointer; /* To indicate mute toggle later */
+}
+
+.volume-bar-background {
+  width: 100px; /* As requested */
+  height: 6px;
+  background-color: #4d4d4d;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer; /* To indicate clickable bar */
+}
+
+.volume-bar-elapsed {
+  height: 100%;
+  background-color: #eeecec;
+  border-radius: 12px;
+  width: 100%; /* Default to full volume */
 }
