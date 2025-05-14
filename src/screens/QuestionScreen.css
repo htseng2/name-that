@@ -6,7 +6,7 @@
   top: 24px;
   left: 50%;
   transform: translateX(-50%); /* Ensure true horizontal centering */
-  width: 100%; /* Optional: consider a max-width or specific width */
+  width: fit-content; /* Optional: consider a max-width or specific width */
 }
 
 /* Styling for the ROUND text */
@@ -100,31 +100,26 @@
 .play-bar-container {
   display: flex;
   align-items: center;
-  width: 80%; /* Adjust as needed */
-  margin: 25px auto 0 auto; /* 25px top margin, centered horizontally */
+  width: 412px; /* Adjust as needed */
+  margin: 12px auto auto auto; /* 12px top margin, centered horizontally */
+  gap: 12px;
 }
 
 .current-time,
 .total-duration {
-  color: #b0b0b0; /* Light grey for time text */
-  font-family: Montserrat, sans-serif; /* Consistent font */
-  font-size: 22px; /* Adjust as needed */
-  font-weight: 500;
-}
-
-.current-time {
-  margin-right: 15px;
-}
-
-.total-duration {
-  margin-left: 15px;
+  font-family: Inter, sans-serif; /* Consistent font */
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #b2b2b2; /* Light grey for time text */
 }
 
 .progress-bar-background {
   flex-grow: 1; /* Allows progress bar to fill available space */
-  height: 12px;
-  background-color: #3a3a3a; /* Dark grey for the track */
-  border-radius: 6px; /* Rounded ends for the track */
+  height: 6px;
+  background-color: #4d4d4d; /* Dark grey for the track */
+  border-radius: 12px; /* Rounded ends for the track */
   overflow: hidden; /* Ensures inner elapsed bar conforms to rounded corners */
   position: relative; /* For potential future use with a draggable thumb */
 }
@@ -132,6 +127,6 @@
 .progress-bar-elapsed {
   height: 100%;
   width: 60%; /* Example: 60% progress, make this dynamic with JS */
-  background-color: #e0e0e0; /* Light grey/white for elapsed portion */
-  border-radius: 6px; /* Rounded ends for the elapsed portion */
+  background-color: #eeecec; /* Light grey/white for elapsed portion */
+  border-radius: 12px; /* Rounded ends for the elapsed portion */
 }

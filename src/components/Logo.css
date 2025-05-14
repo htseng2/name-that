@@ -1,7 +1,7 @@
 .logo {
   --logo-height: 54px; /* Define a variable for height and font scaling */
   /* fixed parent container for consistent sizing */
-  width: 492px;
+  width: fit-content;
   height: var(--logo-height); /* Use the variable */
   display: flex;
   align-items: center;
