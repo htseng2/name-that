@@ -13,13 +13,16 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* Responsive breakpoints */
-  --bp-phone-max: 768px;
-  --bp-tablet-max: 1024px;
-  --bp-laptop-max: 1280px;
-  --bp-proto: 1366px;
-  --bp-desktop-max: 1440px;
-  --bp-hd-max: 1920px;
-  --bp-uhd-max: 2560px;
+
+  --breakpoint-w852: 852px;
+  --breakpoint-w1194: 1194px;
+  --breakpoint-w1280: 1280px;
+  --breakpoint-w1366: 1366px;
+  --breakpoint-w1440: 1440px;
+  --breakpoint-w1920: 1920px;
+  --breakpoint-w2560: 2560px;
+
+  /* Other global variables can go here */
 }
 
 a {
