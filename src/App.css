@@ -9,12 +9,25 @@ body {
 }
 
 .App {
-  height: 100%;
-  min-width: 100vw;
-  background: radial-gradient(circle at center, #005d9d, #053b60);
-  box-sizing: border-box;
-  padding: 32px;
+  min-height: 100dvh;
+  min-width: 100dvw;
+  background-color: #444444;
   font-family: "Montserrat", sans-serif;
+  box-sizing: border-box; /* Ensures padding/border don't add to dimensions */
+  overflow: hidden; /* Prevents scrollbars if .App slightly exceeds viewport */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-content {
+  background: radial-gradient(circle at center, #005d9d, #053b60);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  overflow-y: auto;
+  flex-shrink: 0;
 }
 
 .main-layout-grid {
@@ -133,4 +146,63 @@ button::-moz-focus-inner {
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
+}
+
+/* Using your specific breakpoints from src/index.css */
+
+/* For screens 852px and wider */
+@media (min-width: 852px) {
+  .app-content {
+    width: 852px;
+    height: 353px;
+  }
+}
+
+/* For screens 1194px and wider */
+@media (min-width: 1194px) {
+  .app-content {
+    width: 1194px;
+    height: 834px;
+  }
+}
+
+/* For screens 1280px and wider */
+@media (min-width: 1280px) {
+  .app-content {
+    width: 1280px;
+    height: 1024px;
+    /* DEBUGGING: Test if media query triggers - This line will be removed now */
+  }
+}
+
+/* For screens 1366px and wider */
+@media (min-width: 1366px) {
+  .app-content {
+    width: 1366px;
+    height: 768px;
+  }
+}
+
+/* For screens 1440px and wider */
+@media (min-width: 1440px) {
+  .app-content {
+    width: 1440px;
+    height: 1024px;
+  }
+}
+
+/* For screens 1920px (Full HD) and wider */
+@media (min-width: 1920px) {
+  .app-content {
+    width: 1920px;
+    height: 1080px;
+  }
+}
+
+/* For screens 2560px and wider */
+@media (min-width: 2560px) {
+  .app-content {
+    width: 2560px;
+    height: 1440px;
+  }
 }

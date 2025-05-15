@@ -101,7 +101,11 @@ function App() {
     }
   };
 
-  return <div className="App">{renderScreen()}</div>;
+  return (
+    <div className="App">
+      <div className="app-content">{renderScreen()}</div>
+    </div>
+  );
 }
 
 export default App;
