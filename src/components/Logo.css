@@ -30,3 +30,60 @@
   text-shadow: -0.0238em -0.0238em 0 #0e153c, 0.0238em -0.0238em 0 #0e153c,
     -0.0238em 0.0238em 0 #0e153c, 0.0238em 0.0238em 0 #0e153c; /* Approx 2/84, scales with font-size */
 }
+
+/* --- Responsive Logo Height --- */
+
+/* Default for smallest screens before any min-width media query hits */
+/* This also covers screens up to 1194px due to the max-width query below */
+.logo {
+  --logo-height: 36px; /* Base smallest logo height */
+}
+
+/* For screens UP TO 1194px wide */
+@media (max-width: 1194px) {
+  .logo {
+    --logo-height: 27px;
+  }
+}
+
+/* For screens 1194px and wider */
+@media (min-width: 1194px) {
+  .logo {
+    --logo-height: 54px; /* Your original default size */
+  }
+}
+
+/* For screens 1280px and wider */
+@media (min-width: 1280px) {
+  .logo {
+    --logo-height: 54px;
+  }
+}
+
+/* For screens 1366px and wider */
+@media (min-width: 1366px) {
+  .logo {
+    --logo-height: 54px;
+  }
+}
+
+/* For screens 1440px and wider */
+@media (min-width: 1440px) {
+  .logo {
+    --logo-height: 54px;
+  }
+}
+
+/* For screens 1920px (Full HD) and wider */
+@media (min-width: 1920px) {
+  .logo {
+    --logo-height: 64px;
+  }
+}
+
+/* For screens 2560px and wider */
+@media (min-width: 2560px) {
+  .logo {
+    --logo-height: 84px;
+  }
+}

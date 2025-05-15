@@ -151,10 +151,11 @@ button::-moz-focus-inner {
 /* Using your specific breakpoints from src/index.css */
 
 /* For screens 852px and wider */
-@media (min-width: 852px) {
+@media (max-width: 1194px) {
   .app-content {
     width: 852px;
     height: 353px;
+    padding: 42px 32px 32px 32px;
   }
 }
 
@@ -163,6 +164,7 @@ button::-moz-focus-inner {
   .app-content {
     width: 1194px;
     height: 834px;
+    padding: 96px 74px 64px 74px;
   }
 }
 
@@ -171,6 +173,7 @@ button::-moz-focus-inner {
   .app-content {
     width: 1280px;
     height: 1024px;
+    padding: 74px;
     /* DEBUGGING: Test if media query triggers - This line will be removed now */
   }
 }
@@ -180,6 +183,7 @@ button::-moz-focus-inner {
   .app-content {
     width: 1366px;
     height: 768px;
+    padding: 64px;
   }
 }
 
@@ -188,6 +192,7 @@ button::-moz-focus-inner {
   .app-content {
     width: 1440px;
     height: 1024px;
+    padding: 72px;
   }
 }
 
@@ -196,6 +201,7 @@ button::-moz-focus-inner {
   .app-content {
     width: 1920px;
     height: 1080px;
+    padding: 72px;
   }
 }
 
@@ -204,5 +210,6 @@ button::-moz-focus-inner {
   .app-content {
     width: 2560px;
     height: 1440px;
+    padding: 96px;
   }
 }
