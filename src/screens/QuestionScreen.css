@@ -1,12 +1,11 @@
 .question-header {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centered horizontally */
-  position: absolute;
-  top: 24px;
-  left: 50%;
-  transform: translateX(-50%); /* Ensure true horizontal centering */
+  align-items: center; /* Centered horizontally (for its children) */
   width: fit-content; /* Optional: consider a max-width or specific width */
+  margin-top: 24px; /* Retain some top spacing */
+  margin-left: auto; /* Center the block itself */
+  margin-right: auto; /* Center the block itself */
 }
 
 /* Styling for the ROUND text */

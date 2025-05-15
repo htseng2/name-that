@@ -2,7 +2,9 @@ import React from "react";
 import NavigationButton from "../components/NavigationButton";
 import "./QuestionScreen.css";
 import MusicPlayer from "../components/MusicPlayer";
+import MovieQuestion from "../components/MovieQuestion";
 import { QUESTIONS_DATABASE } from "../constants";
+import toyStory from "../assets/movies/toy-story.webp";
 
 function QuestionScreen({ round, questionIndex, onNext, onPrevious }) {
   return (
@@ -25,7 +27,8 @@ function QuestionScreen({ round, questionIndex, onNext, onPrevious }) {
           QUESTION {questionIndex + 1}
         </div>
       </div>
-      <MusicPlayer />
+      {/* <MusicPlayer /> */}
+      <MovieQuestion movieScreenshotUrl={toyStory} />
     </div>
   );
 }
