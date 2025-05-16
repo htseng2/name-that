@@ -1,4 +1,3 @@
-import "./App.css";
 import StartMenu from "./screens/StartMenu";
 import RoundIntro from "./screens/RoundIntro";
 import QuestionScreen from "./screens/QuestionScreen";
@@ -102,8 +101,8 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div className="app-content">{renderScreen()}</div>
+    <div className="min-h-dvh min-w-dvw bg-neutral-700 font-sans box-border overflow-hidden flex justify-center items-center">
+      <div className="app-content-layout">{renderScreen()}</div>
     </div>
   );
 }

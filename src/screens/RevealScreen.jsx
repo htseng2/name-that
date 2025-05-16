@@ -2,9 +2,13 @@ import React from "react";
 
 function RevealScreen({ round, onNext }) {
   return (
-    <div className="reveal-screen">
-      <h3>Reveal for Round {round}</h3>
-      <button type="button" onClick={onNext}>
+    <div className="flex flex-col items-center justify-center w-full h-full gap-4 text-white">
+      <h3 className="text-3xl font-bold">Reveal for Round {round}</h3>
+      <button
+        type="button"
+        className="w-[216px] h-[50px] px-6 py-3 rounded-[8px] bg-gradient-to-b from-[#66ed18] to-[#0e890e] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] flex items-center justify-center font-black text-2xl leading-none tracking-normal text-white active:bg-blend-overlay active:shadow-[0px_1px_4px_0px_rgba(0,0,0,0.25)] active:[background:linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.2)),linear-gradient(180deg,#66ed18_-33.77%,#0e890e_107.78%)] disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none"
+        onClick={onNext}
+      >
         Next
       </button>
     </div>

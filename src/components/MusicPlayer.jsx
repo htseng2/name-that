@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import "./MusicPlayer.css";
 import questionMark from "../assets/question-mark.webp";
 import playIcon from "../assets/play.webp";
 import pauseIcon from "../assets/pause.webp";
@@ -261,54 +260,78 @@ function MusicPlayer() {
   }, [isDraggingVolume, updateVolumeFromScrub]);
 
   return (
-    <div className="music-player-container">
+    <div className="absolute w-[975px] h-[530px] bottom-[53.5px] left-1/2 -translate-x-1/2 rounded-[24px] bg-black">
       <audio
         ref={audioRef}
-        src={songFile} // This might need to be a prop if songs change
+        src={songFile} // Placeholder for actual song source
         onLoadedMetadata={handleLoadedMetadata}
         onTimeUpdate={handleTimeUpdate}
         onEnded={handleSongEnd}
       />
-      <div className="question-visual-placeholder">
-        <img src={questionMark} alt="Question Mark" />
+
+      <div className="w-[853px] h-[321px] bg-neutral-700 rounded-[24px] mt-[38px] mx-auto flex items-center justify-center py-[31px]">
+        <img
+          src={questionMark} // Placeholder for actual visual
+          alt="Question Visual"
+          className="w-full h-full object-contain"
+        />
       </div>
-      <div className="play-controls-container">
-        <button className="play-button" onClick={togglePlayPause}>
+
+      <div className="mt-[33px] mx-[61px] flex justify-center items-center relative">
+        {/* Play/Pause Button, Progress Bar, and Time Displays */}
+        <div className="flex items-center w-[412px] mt-3 mx-auto gap-3">
+          <span className="font-sans font-normal text-xl leading-none text-neutral-400">
+            {formatTime(currentTime)}
+          </span>
+          <div
+            ref={progressBarBackgroundRef}
+            className="flex-grow h-[6px] bg-neutral-700 rounded-full overflow-hidden relative cursor-pointer"
+            onMouseDown={handleProgressMouseDown}
+            onTouchStart={handleProgressTouchStart}
+          >
+            <div
+              ref={progressBarElapsedRef}
+              className="h-full bg-neutral-200 rounded-full"
+              style={{ width: "0%" }} // Initial width set by JS
+            />
+          </div>
+          <span className="font-sans font-normal text-xl leading-none text-neutral-400">
+            {formatTime(duration)}
+          </span>
+        </div>
+
+        <button
+          onClick={togglePlayPause}
+          className="w-[60px] h-[60px] bg-white rounded-full flex items-center justify-center border-none p-0 cursor-pointer absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" // Centered and overlaid, removed extra 'transform'
+        >
           <img
             src={isPlaying ? pauseIcon : playIcon}
             alt={isPlaying ? "Pause" : "Play"}
+            className="w-[22px] h-[22px] object-contain"
           />
         </button>
-        <div className="volume-bar-container">
+
+        {/* Volume Control */}
+        <div className="absolute top-1/2 -translate-y-1/2 right-0 flex items-center gap-2">
           <img
             src={isMuted || volume === 0 ? muteIcon : volumeIcon}
-            alt={isMuted || volume === 0 ? "Unmute" : "Mute"}
+            alt="Volume"
             onClick={toggleMute}
+            className="w-6 h-6 cursor-pointer"
           />
           <div
-            className="volume-bar-background"
             ref={volumeBarBackgroundRef}
+            className="w-[100px] h-[6px] bg-neutral-700 rounded-full overflow-hidden relative cursor-pointer"
             onMouseDown={handleVolumeMouseDown}
             onTouchStart={handleVolumeTouchStart}
           >
-            <div className="volume-bar-elapsed" ref={volumeBarElapsedRef}></div>
+            <div
+              ref={volumeBarElapsedRef}
+              className="h-full bg-neutral-200 rounded-full"
+              style={{ width: `${volume * 100}%` }} // Initial width set by JS
+            />
           </div>
         </div>
-      </div>
-      <div className="play-bar-container">
-        <span className="current-time">{formatTime(currentTime)}</span>
-        <div
-          className="progress-bar-background"
-          ref={progressBarBackgroundRef}
-          onMouseDown={handleProgressMouseDown}
-          onTouchStart={handleProgressTouchStart}
-        >
-          <div
-            className="progress-bar-elapsed"
-            ref={progressBarElapsedRef}
-          ></div>
-        </div>
-        <span className="total-duration">{formatTime(duration)}</span>
       </div>
     </div>
   );

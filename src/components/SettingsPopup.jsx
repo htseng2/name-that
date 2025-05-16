@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./SettingsPopup.css";
+// import "./SettingsPopup.css"; // Remove CSS import
 import RoundSelector from "./RoundSelector";
 
 function SettingsPopup({
@@ -15,25 +15,46 @@ function SettingsPopup({
     setClosing(true);
     setTimeout(() => {
       onClose();
-      setClosing(false);
-    }, 300);
+      // No need to setClosing(false) here if the component unmounts after onClose
+    }, 300); // Corresponds to animation duration
   };
 
+  const settingsPopupBaseClasses =
+    "fixed top-0 right-0 w-[320px] h-[752px] py-8 px-6 flex flex-col items-center gap-8 bg-[#024d80] rounded-l-[32px] border-r border-black/15 shadow-[-2px_2px_23.1px_2px_rgba(0,0,0,0.15)] z-[1002]";
+
   return (
-    <div className="popup-overlay" onClick={handleClose}>
+    // Popup overlay from App.css, now with Tailwind
+    <div
+      className="fixed inset-0 w-screen h-screen bg-black/50 z-[1000]"
+      onClick={handleClose}
+    >
       <div
-        className={`settings-popup${closing ? " slide-out" : ""}`}
-        onClick={(e) => e.stopPropagation()}
+        className={`${settingsPopupBaseClasses} ${
+          closing ? "animate-slideOut" : "animate-slideIn"
+        }`}
+        onClick={(e) => e.stopPropagation()} // Prevent click from bubbling to overlay
       >
         <div>
-          <div className="settings-popup-title">Settings</div>
-          <div className="settings-divider" />
+          {" "}
+          {/* Grouping title and divider */}
+          <div className="font-black text-2xl leading-none tracking-normal text-center capitalize text-white">
+            Settings
+          </div>
+          <div className="w-[286px] border-t border-white/30 mt-6 mx-auto" />
         </div>
-        <div className="settings-popup-content">
-          <div className="settings-popup-content-item">
-            <div className="settings-popup-content-item-info">
-              <div className="settings-popup-content-item-title">Rounds</div>
-              <div className="settings-popup-content-item-description">
+        <div className="w-[272px] gap-6 flex flex-col">
+          {" "}
+          {/* settings-popup-content */}
+          <div className="flex w-[272px] min-h-[36px] justify-between items-center">
+            {" "}
+            {/* settings-popup-content-item */}
+            <div className="flex flex-col items-start">
+              {" "}
+              {/* settings-popup-content-item-info */}
+              <div className="font-bold text-sm leading-none tracking-normal text-white">
+                Rounds
+              </div>
+              <div className="font-bold text-xs leading-none tracking-normal text-[#fbd11e]">
                 (Max = 4 Rounds)
               </div>
             </div>
@@ -44,12 +65,16 @@ function SettingsPopup({
               onChange={onChangeRounds}
             />
           </div>
-          <div className="settings-popup-content-item">
-            <div className="settings-popup-content-item-info">
-              <div className="settings-popup-content-item-title">
+          <div className="flex w-[272px] min-h-[36px] justify-between items-center">
+            {" "}
+            {/* settings-popup-content-item */}
+            <div className="flex flex-col items-start">
+              {" "}
+              {/* settings-popup-content-item-info */}
+              <div className="font-bold text-sm leading-none tracking-normal text-white">
                 Questions Per Round
               </div>
-              <div className="settings-popup-content-item-description">
+              <div className="font-bold text-xs leading-none tracking-normal text-[#fbd11e]">
                 (Max = 10 Questions)
               </div>
             </div>

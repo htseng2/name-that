@@ -32,7 +32,6 @@ function StartMenu({
     const rect = logoEl.getBoundingClientRect();
     const scale = 64 / rect.height;
 
-    // Clone the logo so the grid layout doesn't reflow
     const clone = logoEl.cloneNode(true);
     clone.style.position = "fixed";
     clone.style.left = `${rect.left}px`;
@@ -44,14 +43,11 @@ function StartMenu({
     clone.style.transition = "transform 0.5s ease";
     document.body.appendChild(clone);
 
-    // Hide the original logo
     logoEl.style.visibility = "hidden";
 
-    // Calculate deltas to center
     const dx = window.innerWidth / 2 - rect.left - rect.width / 2;
     const dy = window.innerHeight / 2 - rect.top - rect.height / 2;
 
-    // Trigger reflow before animating
     clone.getBoundingClientRect();
 
     requestAnimationFrame(() => {
@@ -60,12 +56,12 @@ function StartMenu({
 
     setTimeout(() => {
       onStart({ rounds, questionsPerRound, selectedIndex });
-      document.body.removeChild(clone); // Remove the clone after navigation
+      document.body.removeChild(clone);
     }, 500);
   };
 
   return (
-    <div className="main-layout-grid">
+    <div className="grid items-center grid-rows-[54px_1fr_54px] grid-cols-6 gap-4 w-full h-full">
       <Logo ref={logoRef} />
       <EditionPicker
         options={EDITION_OPTIONS}
@@ -76,14 +72,14 @@ function StartMenu({
       <EditionDisplay edition={EDITION_OPTIONS[selectedIndex]} />
       <button
         type="button"
-        className="app-button app-button-info"
+        className="bg-gradient-to-b from-[#a2d5ec] to-[#6a99ae] shadow-[0px_5.6px_5.6px_0px_rgba(0,0,0,0.25)] w-[50px] h-[50px] rounded-[8px] flex items-center justify-center cursor-pointer active:brightness-80 active:shadow-[0px_2.8px_2.8px_0px_rgba(0,0,0,0.25)] col-start-1 row-start-3 justify-self-start"
         onClick={() => setShowInfo(true)}
       >
-        <FaQuestion />
+        <FaQuestion className="text-white text-2xl" />
       </button>
       <button
         type="button"
-        className="cta-button cta-button-start"
+        className="w-[216px] h-[50px] px-6 py-3 rounded-[8px] bg-gradient-to-b from-[#66ed18] to-[#0e890e] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] flex items-center justify-center font-black text-2xl leading-none tracking-normal text-white active:bg-blend-overlay active:shadow-[0px_1px_4px_0px_rgba(0,0,0,0.25)] active:[background:linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.2)),linear-gradient(180deg,#66ed18_-33.77%,#0e890e_107.78%)] disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none col-start-3 col-span-2 row-start-3 justify-self-center self-center"
         disabled={isStartDisabled || isAnimating}
         onClick={handleStart}
       >
@@ -91,10 +87,10 @@ function StartMenu({
       </button>
       <button
         type="button"
-        className="app-button app-button-settings"
+        className="bg-gradient-to-b from-[#a2d5ec] to-[#6a99ae] shadow-[0px_5.6px_5.6px_0px_rgba(0,0,0,0.25)] w-[50px] h-[50px] rounded-[8px] flex items-center justify-center cursor-pointer active:brightness-80 active:shadow-[0px_2.8px_2.8px_0px_rgba(0,0,0,0.25)] col-start-6 row-start-3 justify-self-end"
         onClick={() => setShowSettings(true)}
       >
-        <FaGear />
+        <FaGear className="text-white text-2xl" />
       </button>
 
       {showSettings && (

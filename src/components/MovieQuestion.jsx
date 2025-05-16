@@ -1,25 +1,34 @@
 import React from "react";
-import "./MovieQuestion.css";
 import tvImage from "../assets/tv.webp";
+import PropTypes from "prop-types";
 
 const MovieQuestion = ({ movieScreenshotUrl }) => {
-  // Placeholder TV monitor image URL - replace with your actual image
   const tvMonitorImageUrl = tvImage;
 
   return (
-    <div className="movie-question-container">
+    <div className="relative w-fit my-[6px] mx-auto">
       <img
         src={tvMonitorImageUrl}
         alt="TV Monitor"
-        className="tv-monitor-image"
+        className="block w-[1092px] h-[632px]"
       />
-      <img
-        src={movieScreenshotUrl}
-        alt="Movie Screenshot"
-        className="movie-screenshot-image"
-      />
+      {movieScreenshotUrl ? (
+        <img
+          src={movieScreenshotUrl}
+          alt="Movie Screenshot"
+          className="absolute top-[25px] left-[23px] w-[1030px] h-[546px] object-cover border-2 border-black"
+        />
+      ) : (
+        <div className="absolute top-[25px] left-[23px] w-[1030px] h-[546px] object-cover border-2 border-black flex items-center justify-center bg-gray-300 text-gray-600">
+          <span>No Screenshot Available</span>
+        </div>
+      )}
     </div>
   );
+};
+
+MovieQuestion.propTypes = {
+  movieScreenshotUrl: PropTypes.string,
 };
 
 export default MovieQuestion;
