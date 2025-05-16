@@ -102,7 +102,18 @@ function App() {
 
   return (
     <div className="min-h-dvh min-w-dvw bg-neutral-700 font-sans box-border overflow-hidden flex justify-center items-center">
-      <div className="app-content-layout">{renderScreen()}</div>
+      <div
+        className="bg-radial-app-content flex flex-col items-center overflow-y-auto flex-shrink-0 
+      w-[852px] h-[353px] pt-[42px] px-[32px] pb-[32px] 
+      w1194:w-[1194px] w1194:h-[834px] w1194:pt-[96px] w1194:px-[74px] w1194:pb-[64px] 
+      w1280:w-[1280px] w1280:h-[1024px] w1280:p-[74px] 
+      w1366:w-[1366px] w1366:h-[768px] w1366:p-[64px] 
+      w1440:w-[1440px] w1440:h-[1024px] w1440:p-[72px] 
+      w1920:w-[1920px] w1920:h-[1080px] w1920:p-[96px] 
+      w2560:w-[2560px] w2560:h-[1440px] w2560:p-[128px]"
+      >
+        {renderScreen()}
+      </div>
     </div>
   );
 }
