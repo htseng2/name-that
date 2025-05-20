@@ -8,7 +8,14 @@ function EditionPicker({ options, selectedIndex, onSelect, pageSize = 6 }) {
   const activePage = Math.floor(startIndex / pageSize);
 
   const pickerButtonBase =
-    "flex items-center justify-center w-12 h-10 bg-[#053b60] rounded-[12px] text-white cursor-pointer active:text-[#fbd11e]";
+    "flex items-center justify-center bg-[#053b60] text-white cursor-pointer active:text-[#fbd11e] " +
+    "box-border w-[24px] h-[20px] rounded-[6px] p-[4px] " +
+    "w1194:w-[48px] w1194:h-[40px] w1194:rounded-[12px] w1194:p-[8px] " +
+    "w1280:w-[48px] w1280:h-[42px] w1280:rounded-[12px] w1280:p-[8px] " +
+    "w1366:w-[48px] w1366:h-[40px] w1366:rounded-[12px] w1366:p-[8px] " +
+    "w1440:w-[72px] w1440:h-[60px] w1440:rounded-[18px] w1440:p-[12px] " +
+    "w1920:w-[72px] w1920:h-[60px] w1920:rounded-[18px] w1920:p-[12px] " +
+    "w2560:w-[86px] w2560:h-[72px] w2560:rounded-[22px] w2560:p-[14px]";
   const editionOptionBase =
     "font-black text-2xl leading-none tracking-normal capitalize w-[370px] h-[37px] py-1 flex items-center justify-center cursor-pointer text-[#053b60]";
 
