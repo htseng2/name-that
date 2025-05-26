@@ -1,12 +1,12 @@
-import React, { useState, useRef } from "react";
-import { FaQuestion } from "react-icons/fa";
-import { FaGear } from "react-icons/fa6";
-import Logo from "../components/Logo";
-import EditionPicker from "../components/EditionPicker";
-import EditionDisplay from "../components/EditionDisplay";
-import SettingsPopup from "../components/SettingsPopup";
-import InfoPopup from "../components/InfoPopup";
-import { EDITION_OPTIONS } from "../constants";
+import React, { useState, useRef } from 'react';
+import { FaQuestion } from 'react-icons/fa';
+import { FaGear } from 'react-icons/fa6';
+import Logo from '../components/Logo';
+import EditionPicker from '../components/EditionPicker';
+import EditionDisplay from '../components/EditionDisplay';
+import SettingsPopup from '../components/SettingsPopup';
+import InfoPopup from '../components/InfoPopup';
+import { EDITION_OPTIONS } from '../constants';
 
 function StartMenu({
   onStart,
@@ -22,8 +22,7 @@ function StartMenu({
   const [showSettings, setShowSettings] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
-  const isStartDisabled =
-    selectedIndex === null || !EDITION_OPTIONS[selectedIndex]?.img;
+  const isStartDisabled = selectedIndex === null || !EDITION_OPTIONS[selectedIndex]?.img;
 
   const handleStart = () => {
     if (isStartDisabled || isAnimating || !logoRef.current) return;
@@ -33,17 +32,17 @@ function StartMenu({
     const scale = 64 / rect.height;
 
     const clone = logoEl.cloneNode(true);
-    clone.style.position = "fixed";
+    clone.style.position = 'fixed';
     clone.style.left = `${rect.left}px`;
     clone.style.top = `${rect.top}px`;
     clone.style.width = `${rect.width}px`;
     clone.style.height = `${rect.height}px`;
-    clone.style.margin = "0";
-    clone.style.zIndex = "1000";
-    clone.style.transition = "transform 0.5s ease";
+    clone.style.margin = '0';
+    clone.style.zIndex = '1000';
+    clone.style.transition = 'transform 0.5s ease';
     document.body.appendChild(clone);
 
-    logoEl.style.visibility = "hidden";
+    logoEl.style.visibility = 'hidden';
 
     const dx = window.innerWidth / 2 - rect.left - rect.width / 2;
     const dy = window.innerHeight / 2 - rect.top - rect.height / 2;
@@ -61,7 +60,15 @@ function StartMenu({
   };
 
   return (
-    <div className="grid items-center grid-rows-[54px_1fr_54px] grid-cols-6 gap-4 w-full h-full">
+    <div
+      className="grid items-center grid-rows-[27px_1fr_36px] grid-cols-6 gap-4 w-full h-full
+      w1194:grid-rows-[52px_1fr_50px] w1194:gap-y-[92px]
+      w1280:grid-rows-[54px_1fr_50px] w1280:gap-y-[142px]
+      w1366:grid-rows-[54px_1fr_50px] w1366:gap-y-[83px]
+      w1440:grid-rows-[52px_1fr_50px] w1440:gap-y-[142px]
+      w1920:grid-rows-[64px_1fr_64px] w1920:gap-y-[110px]
+      w2560:grid-rows-[84px_1fr_84px] w2560:gap-y-[165px]"
+    >
       <Logo ref={logoRef} />
       <EditionPicker
         options={EDITION_OPTIONS}
