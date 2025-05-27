@@ -8,19 +8,31 @@ import SettingsPopup from '../components/SettingsPopup';
 import InfoPopup from '../components/InfoPopup';
 import { EDITION_OPTIONS } from '../constants';
 
+interface StartMenuProps {
+  onStart: (params: {
+    rounds: number;
+    questionsPerRound: number;
+    selectedIndex: number | null;
+  }) => void;
+  rounds: number;
+  questionsPerRound: number;
+  onChangeRounds: (rounds: number) => void;
+  onChangeQuestionsPerRound: (questions: number) => void;
+}
+
 function StartMenu({
   onStart,
   rounds,
   questionsPerRound,
   onChangeRounds,
   onChangeQuestionsPerRound,
-}) {
-  const logoRef = useRef(null);
+}: StartMenuProps) {
+  const logoRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const pageSize = 6;
   const [showInfo, setShowInfo] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const isStartDisabled = selectedIndex === null || !EDITION_OPTIONS[selectedIndex]?.img;
 
@@ -31,7 +43,7 @@ function StartMenu({
     const rect = logoEl.getBoundingClientRect();
     const scale = 64 / rect.height;
 
-    const clone = logoEl.cloneNode(true);
+    const clone = logoEl.cloneNode(true) as HTMLElement;
     clone.style.position = 'fixed';
     clone.style.left = `${rect.left}px`;
     clone.style.top = `${rect.top}px`;
@@ -76,7 +88,9 @@ function StartMenu({
         onSelect={setSelectedIndex}
         pageSize={pageSize}
       />
-      <EditionDisplay edition={EDITION_OPTIONS[selectedIndex]} />
+      <EditionDisplay
+        edition={selectedIndex !== null ? EDITION_OPTIONS[selectedIndex] : undefined}
+      />
       <button
         type="button"
         className="bg-gradient-to-b from-[#a2d5ec] to-[#6a99ae] shadow-[0px_5.6px_5.6px_0px_rgba(0,0,0,0.25)] w-[50px] h-[50px] rounded-[8px] flex items-center justify-center cursor-pointer active:brightness-80 active:shadow-[0px_2.8px_2.8px_0px_rgba(0,0,0,0.25)] col-start-1 row-start-3 justify-self-start"

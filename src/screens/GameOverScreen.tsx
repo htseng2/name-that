@@ -1,6 +1,10 @@
 import React from 'react';
 
-function GameOverScreen({ onRestart }) {
+interface GameOverScreenProps {
+  onRestart: () => void;
+}
+
+function GameOverScreen({ onRestart }: GameOverScreenProps) {
   return (
     <div className="flex flex-col items-center justify-center w-full h-full gap-4 text-white">
       <h2 className="text-4xl font-bold">Game Over!</h2>

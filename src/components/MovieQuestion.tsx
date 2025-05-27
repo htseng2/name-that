@@ -1,17 +1,16 @@
-import React from "react";
-import tvImage from "../assets/tv.webp";
-import PropTypes from "prop-types";
+import React from 'react';
+import tvImage from '../assets/tv.webp';
 
-const MovieQuestion = ({ movieScreenshotUrl }) => {
+interface MovieQuestionProps {
+  movieScreenshotUrl?: string;
+}
+
+const MovieQuestion: React.FC<MovieQuestionProps> = ({ movieScreenshotUrl }) => {
   const tvMonitorImageUrl = tvImage;
 
   return (
     <div className="relative w-fit my-[6px] mx-auto">
-      <img
-        src={tvMonitorImageUrl}
-        alt="TV Monitor"
-        className="block w-[1092px] h-[632px]"
-      />
+      <img src={tvMonitorImageUrl} alt="TV Monitor" className="block w-[1092px] h-[632px]" />
       {movieScreenshotUrl ? (
         <img
           src={movieScreenshotUrl}
@@ -25,10 +24,6 @@ const MovieQuestion = ({ movieScreenshotUrl }) => {
       )}
     </div>
   );
-};
-
-MovieQuestion.propTypes = {
-  movieScreenshotUrl: PropTypes.string,
 };
 
 export default MovieQuestion;

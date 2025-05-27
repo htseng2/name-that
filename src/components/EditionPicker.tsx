@@ -2,7 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { TbTriangleFilled, TbTriangleInvertedFilled } from 'react-icons/tb';
 import { GoDotFill } from 'react-icons/go';
 
-function EditionPicker({ options, selectedIndex, onSelect, pageSize = 4 }) {
+interface EditionOption {
+  title: string;
+}
+
+interface EditionPickerProps {
+  options: EditionOption[];
+  selectedIndex: number;
+  onSelect: (index: number) => void;
+  pageSize?: number;
+}
+
+const EditionPicker: React.FC<EditionPickerProps> = ({
+  options,
+  selectedIndex,
+  onSelect,
+  pageSize = 4,
+}) => {
   const [startIndex, setStartIndex] = useState(0);
   const [currentPageSize, setCurrentPageSize] = useState(pageSize);
 
@@ -131,6 +147,6 @@ function EditionPicker({ options, selectedIndex, onSelect, pageSize = 4 }) {
       </button>
     </div>
   );
-}
+};
 
 export default EditionPicker;

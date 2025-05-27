@@ -1,88 +1,99 @@
-import StartMenu from "./screens/StartMenu";
-import RoundIntro from "./screens/RoundIntro";
-import QuestionScreen from "./screens/QuestionScreen";
-import RevealScreen from "./screens/RevealScreen";
-import GameOverScreen from "./screens/GameOverScreen";
-import { useState } from "react";
+import React, { useState } from 'react';
+import StartMenu from './screens/StartMenu';
+import RoundIntro from './screens/RoundIntro';
+import QuestionScreen from './screens/QuestionScreen';
+import RevealScreen from './screens/RevealScreen';
+import GameOverScreen from './screens/GameOverScreen';
+
+type Screen = 'start' | 'intro' | 'question' | 'reveal' | 'over';
+
+interface Settings {
+  rounds: number;
+  questionsPerRound: number;
+}
+
+interface StartParams {
+  rounds: number;
+  questionsPerRound: number;
+  selectedIndex: number | null;
+}
 
 function App() {
-  const [screen, setScreen] = useState("start");
+  const [screen, setScreen] = useState<Screen>('start');
   const [round, setRound] = useState(1);
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [settings, setSettings] = useState({
+  const [settings, setSettings] = useState<Settings>({
     rounds: 2,
     questionsPerRound: 2,
   });
-  const [_selectedEditionIndex, setSelectedEditionIndex] = useState(null);
+  const [_selectedEditionIndex, setSelectedEditionIndex] = useState<number | null>(null);
   const [roundIntroKey, setRoundIntroKey] = useState(0);
 
-  const goTo = (next) => {
-    if (next === "intro") {
-      setRoundIntroKey((prevKey) => prevKey + 1);
+  const goTo = (next: Screen) => {
+    if (next === 'intro') {
+      setRoundIntroKey(prevKey => prevKey + 1);
     }
     setScreen(next);
   };
 
-  const handleStart = ({ rounds, questionsPerRound, selectedIndex }) => {
+  const handleStart = ({ rounds, questionsPerRound, selectedIndex }: StartParams) => {
     setSettings({ rounds, questionsPerRound });
     setSelectedEditionIndex(selectedIndex);
     setRound(1);
     setQuestionIndex(0);
-    goTo("intro");
+    goTo('intro');
   };
 
   const handleRevealNext = () => {
     if (round < settings.rounds) {
       setRound(round + 1);
       setQuestionIndex(0);
-      goTo("intro");
+      goTo('intro');
     } else {
-      goTo("over");
+      goTo('over');
     }
   };
 
   const handleQuestionNext = () => {
     if (questionIndex + 1 < settings.questionsPerRound) {
       setQuestionIndex(questionIndex + 1);
-      goTo("question");
+      goTo('question');
     } else {
-      goTo("reveal");
+      goTo('reveal');
     }
   };
 
   const handlePreviousQuestion = () => {
     if (questionIndex > 0) {
       setQuestionIndex(questionIndex - 1);
-      goTo("question");
+      goTo('question');
     } else {
-      goTo("intro");
+      goTo('intro');
     }
   };
 
   const renderScreen = () => {
     switch (screen) {
-      case "start":
+      case 'start':
         return (
           <StartMenu
             rounds={settings.rounds}
             questionsPerRound={settings.questionsPerRound}
-            onChangeRounds={(r) => setSettings((s) => ({ ...s, rounds: r }))}
-            onChangeQuestionsPerRound={(q) =>
-              setSettings((s) => ({ ...s, questionsPerRound: q }))
-            }
+            onChangeRounds={r => setSettings(s => ({ ...s, rounds: r }))}
+            onChangeQuestionsPerRound={q => setSettings(s => ({ ...s, questionsPerRound: q }))}
             onStart={handleStart}
           />
         );
-      case "intro":
+      case 'intro':
         return (
           <RoundIntro
             key={roundIntroKey}
             round={round}
             questionsPerRound={settings.questionsPerRound}
-            onNext={() => goTo("question")}
+            onNext={() => goTo('question')}
           />
         );
-      case "question":
+      case 'question':
         return (
           <QuestionScreen
             round={round}
@@ -91,10 +102,10 @@ function App() {
             onPrevious={handlePreviousQuestion}
           />
         );
-      case "reveal":
+      case 'reveal':
         return <RevealScreen round={round} onNext={handleRevealNext} />;
-      case "over":
-        return <GameOverScreen onRestart={() => goTo("start")} />;
+      case 'over':
+        return <GameOverScreen onRestart={() => goTo('start')} />;
       default:
         return null;
     }

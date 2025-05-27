@@ -1,10 +1,18 @@
-import React from "react";
-// import "./EditionDisplay.css"; // Remove this import
-import notAvailable from "../assets/editions/not-available.webp";
+import React from 'react';
+import notAvailable from '../assets/editions/not-available.webp';
 
-function EditionDisplay({ edition }) {
+interface Edition {
+  img?: string;
+  title?: string;
+}
+
+interface EditionDisplayProps {
+  edition?: Edition;
+}
+
+function EditionDisplay({ edition }: EditionDisplayProps) {
   const imgSrc = edition?.img ?? notAvailable;
-  const altText = edition?.title ?? "placeholder";
+  const altText = edition?.title ?? 'placeholder';
   return (
     <div
       className="

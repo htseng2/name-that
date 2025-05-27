@@ -1,25 +1,25 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
-import questionMark from "../assets/question-mark.webp";
-import playIcon from "../assets/play.webp";
-import pauseIcon from "../assets/pause.webp";
-import songFile from "../assets/songs/baby-one-more-time.m4a"; // Assuming this path is correct relative to this new component or it will be passed as a prop
-import volumeIcon from "../assets/volume.webp";
-import muteIcon from "../assets/mute.webp";
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import questionMark from '../assets/question-mark.webp';
+import playIcon from '../assets/play.webp';
+import pauseIcon from '../assets/pause.webp';
+import songFile from '../assets/songs/baby-one-more-time.m4a';
+import volumeIcon from '../assets/volume.webp';
+import muteIcon from '../assets/mute.webp';
 
-function MusicPlayer() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [duration, setDuration] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [volume, setVolume] = useState(1); // Volume from 0 to 1
-  const [isMuted, setIsMuted] = useState(false);
-  const [isDraggingProgress, setIsDraggingProgress] = useState(false);
-  const [isDraggingVolume, setIsDraggingVolume] = useState(false);
+const MusicPlayer: React.FC = () => {
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [duration, setDuration] = useState<number>(0);
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [volume, setVolume] = useState<number>(1); // Volume from 0 to 1
+  const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [isDraggingProgress, setIsDraggingProgress] = useState<boolean>(false);
+  const [isDraggingVolume, setIsDraggingVolume] = useState<boolean>(false);
 
-  const audioRef = useRef(null);
-  const progressBarElapsedRef = useRef(null);
-  const volumeBarElapsedRef = useRef(null);
-  const progressBarBackgroundRef = useRef(null);
-  const volumeBarBackgroundRef = useRef(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const progressBarElapsedRef = useRef<HTMLDivElement | null>(null);
+  const volumeBarElapsedRef = useRef<HTMLDivElement | null>(null);
+  const progressBarBackgroundRef = useRef<HTMLDivElement | null>(null);
+  const volumeBarBackgroundRef = useRef<HTMLDivElement | null>(null);
 
   // Initialize audio volume and muted state
   useEffect(() => {
@@ -54,13 +54,11 @@ function MusicPlayer() {
   // Effect to update volume bar width
   useEffect(() => {
     if (volumeBarElapsedRef.current) {
-      volumeBarElapsedRef.current.style.width = isMuted
-        ? `0%`
-        : `${volume * 100}%`;
+      volumeBarElapsedRef.current.style.width = isMuted ? `0%` : `${volume * 100}%`;
     }
   }, [volume, isMuted]);
 
-  const togglePlayPause = () => {
+  const togglePlayPause = (): void => {
     if (!audioRef.current) return;
     if (isPlaying) {
       audioRef.current.pause();
@@ -70,39 +68,33 @@ function MusicPlayer() {
     setIsPlaying(!isPlaying);
   };
 
-  const handleTimeUpdate = () => {
-    setCurrentTime(audioRef.current.currentTime);
+  const handleTimeUpdate = (): void => {
+    if (audioRef.current) {
+      setCurrentTime(audioRef.current.currentTime);
+    }
   };
 
-  const handleLoadedMetadata = () => {
+  const handleLoadedMetadata = (): void => {
     if (!audioRef.current) return;
     setDuration(audioRef.current.duration);
-    // Volume and muted state are already set by their respective useEffects or initialization.
-    // Ensure these are correctly applied when metadata loads if necessary,
-    // though current setup might handle it.
     audioRef.current.volume = volume;
     audioRef.current.muted = isMuted;
   };
 
-  const handleSongEnd = () => {
+  const handleSongEnd = (): void => {
     setIsPlaying(false);
-    setCurrentTime(0); // Reset currentTime to 0, which should also reset the progress bar via its useEffect
+    setCurrentTime(0);
   };
 
-  const formatTime = (timeInSeconds) => {
+  const formatTime = (timeInSeconds: number): string => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = Math.floor(timeInSeconds % 60);
-    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
   const updateCurrentTimeFromScrub = useCallback(
-    (clientX) => {
-      if (
-        !audioRef.current ||
-        !progressBarBackgroundRef.current ||
-        duration === 0
-      )
-        return;
+    (clientX: number): void => {
+      if (!audioRef.current || !progressBarBackgroundRef.current || duration === 0) return;
       const bar = progressBarBackgroundRef.current;
       const rect = bar.getBoundingClientRect();
       const x = clientX - rect.left;
@@ -118,7 +110,7 @@ function MusicPlayer() {
   );
 
   const handleProgressMouseDown = useCallback(
-    (event) => {
+    (event: React.MouseEvent<HTMLDivElement>): void => {
       setIsDraggingProgress(true);
       updateCurrentTimeFromScrub(event.clientX);
     },
@@ -126,7 +118,7 @@ function MusicPlayer() {
   );
 
   const handleProgressTouchStart = useCallback(
-    (event) => {
+    (event: React.TouchEvent<HTMLDivElement>): void => {
       setIsDraggingProgress(true);
       updateCurrentTimeFromScrub(event.touches[0].clientX);
     },
@@ -134,50 +126,50 @@ function MusicPlayer() {
   );
 
   useEffect(() => {
-    const handleMouseMove = (event) => {
+    const handleMouseMove = (event: MouseEvent): void => {
       if (isDraggingProgress) {
         updateCurrentTimeFromScrub(event.clientX);
       }
     };
-    const handleMouseUp = () => {
+    const handleMouseUp = (): void => {
       if (isDraggingProgress) {
         setIsDraggingProgress(false);
       }
     };
-    const handleTouchMove = (event) => {
+    const handleTouchMove = (event: TouchEvent): void => {
       if (isDraggingProgress) {
         updateCurrentTimeFromScrub(event.touches[0].clientX);
       }
     };
-    const handleTouchEnd = () => {
+    const handleTouchEnd = (): void => {
       if (isDraggingProgress) {
         setIsDraggingProgress(false);
       }
     };
 
     if (isDraggingProgress) {
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-      document.addEventListener("touchmove", handleTouchMove);
-      document.addEventListener("touchend", handleTouchEnd);
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('touchmove', handleTouchMove);
+      document.addEventListener('touchend', handleTouchEnd);
     } else {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-      document.removeEventListener("touchmove", handleTouchMove);
-      document.removeEventListener("touchend", handleTouchEnd);
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
     }
 
     return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-      document.removeEventListener("touchmove", handleTouchMove);
-      document.removeEventListener("touchend", handleTouchEnd);
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
     };
   }, [isDraggingProgress, updateCurrentTimeFromScrub]);
 
-  const toggleMute = () => setIsMuted(!isMuted);
+  const toggleMute = (): void => setIsMuted(!isMuted);
 
-  const updateVolumeFromScrub = useCallback((clientX) => {
+  const updateVolumeFromScrub = useCallback((clientX: number): void => {
     if (!volumeBarBackgroundRef.current) return;
     const bar = volumeBarBackgroundRef.current;
     const rect = bar.getBoundingClientRect();
@@ -190,7 +182,7 @@ function MusicPlayer() {
   }, []);
 
   const handleVolumeMouseDown = useCallback(
-    (event) => {
+    (event: React.MouseEvent<HTMLDivElement>): void => {
       setIsDraggingVolume(true);
       updateVolumeFromScrub(event.clientX);
     },
@@ -198,7 +190,7 @@ function MusicPlayer() {
   );
 
   const handleVolumeTouchStart = useCallback(
-    (event) => {
+    (event: React.TouchEvent<HTMLDivElement>): void => {
       setIsDraggingVolume(true);
       updateVolumeFromScrub(event.touches[0].clientX);
     },
@@ -206,56 +198,44 @@ function MusicPlayer() {
   );
 
   useEffect(() => {
-    const handleDocumentMouseMoveForVolume = (event) => {
+    const handleDocumentMouseMoveForVolume = (event: MouseEvent): void => {
       if (isDraggingVolume) {
         updateVolumeFromScrub(event.clientX);
       }
     };
-    const handleDocumentMouseUpForVolume = () => {
+    const handleDocumentMouseUpForVolume = (): void => {
       if (isDraggingVolume) {
         setIsDraggingVolume(false);
       }
     };
-    const handleDocumentTouchMoveForVolume = (event) => {
+    const handleDocumentTouchMoveForVolume = (event: TouchEvent): void => {
       if (isDraggingVolume) {
         updateVolumeFromScrub(event.touches[0].clientX);
       }
     };
-    const handleDocumentTouchEndForVolume = () => {
+    const handleDocumentTouchEndForVolume = (): void => {
       if (isDraggingVolume) {
         setIsDraggingVolume(false);
       }
     };
 
     if (isDraggingVolume) {
-      document.addEventListener("mousemove", handleDocumentMouseMoveForVolume);
-      document.addEventListener("mouseup", handleDocumentMouseUpForVolume);
-      document.addEventListener("touchmove", handleDocumentTouchMoveForVolume);
-      document.addEventListener("touchend", handleDocumentTouchEndForVolume);
+      document.addEventListener('mousemove', handleDocumentMouseMoveForVolume);
+      document.addEventListener('mouseup', handleDocumentMouseUpForVolume);
+      document.addEventListener('touchmove', handleDocumentTouchMoveForVolume);
+      document.addEventListener('touchend', handleDocumentTouchEndForVolume);
     } else {
-      document.removeEventListener(
-        "mousemove",
-        handleDocumentMouseMoveForVolume
-      );
-      document.removeEventListener("mouseup", handleDocumentMouseUpForVolume);
-      document.removeEventListener(
-        "touchmove",
-        handleDocumentTouchMoveForVolume
-      );
-      document.removeEventListener("touchend", handleDocumentTouchEndForVolume);
+      document.removeEventListener('mousemove', handleDocumentMouseMoveForVolume);
+      document.removeEventListener('mouseup', handleDocumentMouseUpForVolume);
+      document.removeEventListener('touchmove', handleDocumentTouchMoveForVolume);
+      document.removeEventListener('touchend', handleDocumentTouchEndForVolume);
     }
 
     return () => {
-      document.removeEventListener(
-        "mousemove",
-        handleDocumentMouseMoveForVolume
-      );
-      document.removeEventListener("mouseup", handleDocumentMouseUpForVolume);
-      document.removeEventListener(
-        "touchmove",
-        handleDocumentTouchMoveForVolume
-      );
-      document.removeEventListener("touchend", handleDocumentTouchEndForVolume);
+      document.removeEventListener('mousemove', handleDocumentMouseMoveForVolume);
+      document.removeEventListener('mouseup', handleDocumentMouseUpForVolume);
+      document.removeEventListener('touchmove', handleDocumentTouchMoveForVolume);
+      document.removeEventListener('touchend', handleDocumentTouchEndForVolume);
     };
   }, [isDraggingVolume, updateVolumeFromScrub]);
 
@@ -263,18 +243,14 @@ function MusicPlayer() {
     <div className="absolute w-[975px] h-[530px] bottom-[53.5px] left-1/2 -translate-x-1/2 rounded-[24px] bg-black">
       <audio
         ref={audioRef}
-        src={songFile} // Placeholder for actual song source
+        src={songFile}
         onLoadedMetadata={handleLoadedMetadata}
         onTimeUpdate={handleTimeUpdate}
         onEnded={handleSongEnd}
       />
 
       <div className="w-[853px] h-[321px] bg-neutral-700 rounded-[24px] mt-[38px] mx-auto flex items-center justify-center py-[31px]">
-        <img
-          src={questionMark} // Placeholder for actual visual
-          alt="Question Visual"
-          className="w-full h-full object-contain"
-        />
+        <img src={questionMark} alt="Question Visual" className="w-full h-full object-contain" />
       </div>
 
       <div className="mt-[33px] mx-[61px] flex justify-center items-center relative">
@@ -292,7 +268,7 @@ function MusicPlayer() {
             <div
               ref={progressBarElapsedRef}
               className="h-full bg-neutral-200 rounded-full"
-              style={{ width: "0%" }} // Initial width set by JS
+              style={{ width: '0%' }}
             />
           </div>
           <span className="font-sans font-normal text-xl leading-none text-neutral-400">
@@ -302,11 +278,11 @@ function MusicPlayer() {
 
         <button
           onClick={togglePlayPause}
-          className="w-[60px] h-[60px] bg-white rounded-full flex items-center justify-center border-none p-0 cursor-pointer absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" // Centered and overlaid, removed extra 'transform'
+          className="w-[60px] h-[60px] bg-white rounded-full flex items-center justify-center border-none p-0 cursor-pointer absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         >
           <img
             src={isPlaying ? pauseIcon : playIcon}
-            alt={isPlaying ? "Pause" : "Play"}
+            alt={isPlaying ? 'Pause' : 'Play'}
             className="w-[22px] h-[22px] object-contain"
           />
         </button>
@@ -328,13 +304,13 @@ function MusicPlayer() {
             <div
               ref={volumeBarElapsedRef}
               className="h-full bg-neutral-200 rounded-full"
-              style={{ width: `${volume * 100}%` }} // Initial width set by JS
+              style={{ width: `${volume * 100}%` }}
             />
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default MusicPlayer;

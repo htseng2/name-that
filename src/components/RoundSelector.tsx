@@ -1,20 +1,31 @@
-import React, { useState } from "react";
-import { FaMinus, FaPlus } from "react-icons/fa";
-// import "./RoundSelector.css"; // Removed CSS import
+import React, { useState } from 'react';
+import { FaMinus, FaPlus } from 'react-icons/fa';
 
-function RoundSelector({ min = 1, max = 10, initial = 1, onChange }) {
-  const [value, setValue] = useState(initial);
+interface RoundSelectorProps {
+  min?: number;
+  max?: number;
+  initial?: number;
+  onChange?: (value: number) => void;
+}
 
-  const dec = () => {
-    setValue((prev) => {
+const RoundSelector: React.FC<RoundSelectorProps> = ({
+  min = 1,
+  max = 10,
+  initial = 1,
+  onChange,
+}) => {
+  const [value, setValue] = useState<number>(initial);
+
+  const dec = (): void => {
+    setValue(prev => {
       const next = Math.max(prev - 1, min);
       onChange?.(next);
       return next;
     });
   };
 
-  const inc = () => {
-    setValue((prev) => {
+  const inc = (): void => {
+    setValue(prev => {
       const next = Math.min(prev + 1, max);
       onChange?.(next);
       return next;
@@ -44,6 +55,6 @@ function RoundSelector({ min = 1, max = 10, initial = 1, onChange }) {
       </button>
     </div>
   );
-}
+};
 
 export default RoundSelector;
