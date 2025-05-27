@@ -36,10 +36,30 @@ function EditionPicker({ options, selectedIndex, onSelect, pageSize = 4 }) {
     'w1920:w-[72px] w1920:h-[60px] w1920:rounded-[18px] w1920:p-[12px] ' +
     'w2560:w-[86px] w2560:h-[72px] w2560:rounded-[22px] w2560:p-[14px]';
   const editionOptionBase =
-    'font-black text-2xl leading-none tracking-normal capitalize w-[370px] h-[37px] py-1 flex items-center justify-center cursor-pointer text-[#053b60]';
+    'font-black text-2xl leading-none tracking-normal capitalize w-[250px] h-[27px] py-1 flex items-center justify-center cursor-pointer text-[#053b60] ' +
+    'w1194:w-[370px] w1194:h-[37px] ' +
+    'w1280:w-[452px] w1280:h-[46px] ' +
+    'w1366:w-[370px] w1366:h-[37px] ' +
+    'w1440:w-[452px] w1440:h-[46px] ' +
+    'w1920:w-[555px] w1920:h-[56px] ' +
+    'w2560:w-[658px] w2560:h-[74px]';
 
   return (
-    <div className="col-start-1 col-span-3 row-start-2 justify-self-center self-center grid grid-cols-[1fr_auto] grid-rows-[auto_auto_auto] gap-4 w-[360px]">
+    <div
+      className={`
+      col-start-1 col-span-3 row-start-2
+      justify-self-center self-center
+      grid grid-cols-[1fr_auto] grid-rows-[auto_auto_auto]
+      w-[360px]
+      gap-[6px]
+      w1194:gap-[12px]
+      w1280:gap-[12px]
+      w1366:gap-[12px]
+      w1440:gap-[12px]
+      w1920:gap-[18px]
+      w2560:gap-[24px]
+    `}
+    >
       <button
         type="button"
         className={`${pickerButtonBase} col-span-full row-start-1 justify-self-center self-center`}
