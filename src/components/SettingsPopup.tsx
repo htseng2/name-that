@@ -22,39 +22,36 @@ const SettingsPopup: React.FC<SettingsPopupProps> = ({
     setClosing(true);
     setTimeout(() => {
       onClose();
-      // No need to setClosing(false) here if the component unmounts after onClose
-    }, 300); // Corresponds to animation duration
+    }, 300);
   };
 
   const settingsPopupBaseClasses =
-    'fixed top-0 right-0 w-[320px] h-[752px] py-8 px-6 flex flex-col items-center gap-8 bg-[#024d80] rounded-l-[32px] border-r border-black/15 shadow-[-2px_2px_23.1px_2px_rgba(0,0,0,0.15)] z-[1002]';
+    'absolute top-0 bottom-0 my-auto right-0 py-8 px-6 flex flex-col items-center gap-8 bg-[#024d80] rounded-l-[32px] border-r border-black/15 shadow-[-2px_2px_23.1px_2px_rgba(0,0,0,0.15)] z-[1002] ' +
+    'w-[298px] h-[369px] ' + // Default dimensions
+    'w1194:w-[386px] w1194:h-[810px] ' +
+    'w1280:w-[320px] w1280:h-[1000px] ' +
+    'w1366:w-[320px] w1366:h-[752px] ' +
+    'w1440:w-[425px] w1440:h-[1000px] ' +
+    'w1920:w-[432px] w1920:h-[1016px] ' +
+    'w2560:w-[585px] w2560:h-[1375px]';
 
   return (
-    // Popup overlay from App.css, now with Tailwind
-    <div className="fixed inset-0 w-screen h-screen bg-black/50 z-[1000]" onClick={handleClose}>
+    <div className="absolute inset-0 w-full h-full bg-black/50 z-[1000]" onClick={handleClose}>
       <div
         className={`${settingsPopupBaseClasses} ${
           closing ? 'animate-slideOut' : 'animate-slideIn'
         }`}
-        onClick={e => e.stopPropagation()} // Prevent click from bubbling to overlay
+        onClick={e => e.stopPropagation()}
       >
         <div>
-          {' '}
-          {/* Grouping title and divider */}
           <div className="font-black text-2xl leading-none tracking-normal text-center capitalize text-white">
             Settings
           </div>
           <div className="w-[286px] border-t border-white/30 mt-6 mx-auto" />
         </div>
         <div className="w-[272px] gap-6 flex flex-col">
-          {' '}
-          {/* settings-popup-content */}
           <div className="flex w-[272px] min-h-[36px] justify-between items-center">
-            {' '}
-            {/* settings-popup-content-item */}
             <div className="flex flex-col items-start">
-              {' '}
-              {/* settings-popup-content-item-info */}
               <div className="font-bold text-sm leading-none tracking-normal text-white">
                 Rounds
               </div>
@@ -65,11 +62,7 @@ const SettingsPopup: React.FC<SettingsPopupProps> = ({
             <RoundSelector min={1} max={4} initial={rounds} onChange={onChangeRounds} />
           </div>
           <div className="flex w-[272px] min-h-[36px] justify-between items-center">
-            {' '}
-            {/* settings-popup-content-item */}
             <div className="flex flex-col items-start">
-              {' '}
-              {/* settings-popup-content-item-info */}
               <div className="font-bold text-sm leading-none tracking-normal text-white">
                 Questions Per Round
               </div>
