@@ -1,5 +1,4 @@
 import React from 'react';
-import NavigationButton from '../components/NavigationButton';
 import MusicPlayer from '../components/MusicPlayer';
 import MovieQuestion from '../components/MovieQuestion';
 import { QUESTIONS_DATABASE } from '../constants';
@@ -8,20 +7,11 @@ import toyStory from '../assets/movies/toy-story.webp';
 interface QuestionScreenProps {
   round: number;
   questionIndex: number;
-  onNext: () => void;
-  onPrevious: () => void;
 }
 
-function QuestionScreen({ round, questionIndex, onNext, onPrevious }: QuestionScreenProps) {
+function QuestionScreen({ round, questionIndex }: QuestionScreenProps) {
   return (
     <div className="w-full h-full flex flex-col items-center pt-6 relative">
-      <NavigationButton
-        onClick={onPrevious}
-        show={true}
-        direction="previous"
-        label="Previous Question"
-      />
-      <NavigationButton onClick={onNext} show={true} direction="next" label="Answer Question" />
       <div className="flex flex-col items-center w-fit mx-auto">
         <div className="font-black text-[32px] leading-none tracking-[.05em] uppercase text-[#8796a0] py-1">
           ROUND {round}

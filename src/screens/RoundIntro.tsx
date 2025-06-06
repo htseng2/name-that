@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Logo from '../components/Logo.tsx';
-import NavigationButton from '../components/NavigationButton';
 import { useSpring, animated } from 'react-spring';
 
 interface RoundIntroProps {
   round: number;
-  onNext: () => void;
   questionsPerRound: number;
+  onAnimationComplete: () => void;
 }
 
-function RoundIntro({ round, onNext, questionsPerRound }: RoundIntroProps) {
+function RoundIntro({ round, questionsPerRound, onAnimationComplete }: RoundIntroProps) {
   const [logoAnimation, api] = useSpring(() => ({
     opacity: 0,
     transform: 'translateY(50vh) scale(1)',
@@ -27,8 +26,6 @@ function RoundIntro({ round, onNext, questionsPerRound }: RoundIntroProps) {
     config: { duration: 500 },
   }));
 
-  const [showNextButton, setShowNextButton] = useState(false);
-
   useEffect(() => {
     api.start({
       to: {
@@ -43,24 +40,17 @@ function RoundIntro({ round, onNext, questionsPerRound }: RoundIntroProps) {
             questionsTextApi.start({
               to: { opacity: 1 },
               onRest: () => {
-                setShowNextButton(true);
+                onAnimationComplete();
               },
             });
           },
         });
       },
     });
-  }, [api, bannerApi, questionsTextApi]);
+  }, [api, bannerApi, questionsTextApi, onAnimationComplete]);
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center relative">
-      <NavigationButton
-        onClick={onNext}
-        show={showNextButton}
-        direction="next"
-        label="Next Round"
-        shouldBlink={true}
-      />
       <animated.div style={logoAnimation}>
         <Logo />
       </animated.div>

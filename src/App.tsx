@@ -4,6 +4,7 @@ import RoundIntro from './screens/RoundIntro';
 import QuestionScreen from './screens/QuestionScreen';
 import RevealScreen from './screens/RevealScreen';
 import GameOverScreen from './screens/GameOverScreen';
+import NavigationButton from './components/NavigationButton';
 
 type Screen = 'start' | 'intro' | 'question' | 'reveal' | 'over';
 
@@ -28,10 +29,12 @@ function App() {
   });
   const [_selectedEditionIndex, setSelectedEditionIndex] = useState<number | null>(null);
   const [roundIntroKey, setRoundIntroKey] = useState(0);
+  const [showRoundIntroButton, setShowRoundIntroButton] = useState(false);
 
   const goTo = (next: Screen) => {
     if (next === 'intro') {
       setRoundIntroKey(prevKey => prevKey + 1);
+      setShowRoundIntroButton(false);
     }
     setScreen(next);
   };
@@ -72,6 +75,40 @@ function App() {
     }
   };
 
+  // Navigation button logic
+  const getNavigationConfig = () => {
+    switch (screen) {
+      case 'intro':
+        return {
+          showNext: showRoundIntroButton,
+          showPrevious: false,
+          onNext: () => goTo('question'),
+          onPrevious: () => {},
+          nextLabel: 'Next Round',
+          shouldBlinkNext: true,
+        };
+      case 'question':
+        return {
+          showNext: true,
+          showPrevious: true,
+          onNext: handleQuestionNext,
+          onPrevious: handlePreviousQuestion,
+          nextLabel: 'Answer Question',
+          previousLabel: 'Previous Question',
+          shouldBlinkNext: false,
+        };
+      default:
+        return {
+          showNext: false,
+          showPrevious: false,
+          onNext: () => {},
+          onPrevious: () => {},
+        };
+    }
+  };
+
+  const navigationConfig = getNavigationConfig();
+
   const renderScreen = () => {
     switch (screen) {
       case 'start':
@@ -90,18 +127,11 @@ function App() {
             key={roundIntroKey}
             round={round}
             questionsPerRound={settings.questionsPerRound}
-            onNext={() => goTo('question')}
+            onAnimationComplete={() => setShowRoundIntroButton(true)}
           />
         );
       case 'question':
-        return (
-          <QuestionScreen
-            round={round}
-            questionIndex={questionIndex}
-            onNext={handleQuestionNext}
-            onPrevious={handlePreviousQuestion}
-          />
-        );
+        return <QuestionScreen round={round} questionIndex={questionIndex} />;
       case 'reveal':
         return <RevealScreen round={round} onNext={handleRevealNext} />;
       case 'over':
@@ -123,6 +153,25 @@ function App() {
       w1920:w-[1920px] w1920:h-[1080px] w1920:p-[96px] 
       w2560:w-[2560px] w2560:h-[1440px] w2560:p-[128px]"
       >
+        {/* Navigation buttons positioned at container level */}
+        {navigationConfig.showPrevious && (
+          <NavigationButton
+            onClick={navigationConfig.onPrevious}
+            show={true}
+            direction="previous"
+            label={navigationConfig.previousLabel}
+          />
+        )}
+        {navigationConfig.showNext && (
+          <NavigationButton
+            onClick={navigationConfig.onNext}
+            show={true}
+            direction="next"
+            label={navigationConfig.nextLabel}
+            shouldBlink={navigationConfig.shouldBlinkNext}
+          />
+        )}
+
         {renderScreen()}
       </div>
     </div>
