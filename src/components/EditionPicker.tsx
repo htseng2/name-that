@@ -52,13 +52,13 @@ const EditionPicker: React.FC<EditionPickerProps> = ({
     'w1920:w-[72px] w1920:h-[60px] w1920:rounded-[18px] w1920:p-[12px] ' +
     'w2560:w-[86px] w2560:h-[72px] w2560:rounded-[22px] w2560:p-[14px]';
   const editionOptionBase =
-    'font-black text-2xl leading-none tracking-normal capitalize w-[250px] h-[27px] py-1 flex items-center justify-center cursor-pointer text-[#053b60] ' +
-    'w1194:w-[370px] w1194:h-[37px] ' +
-    'w1280:w-[452px] w1280:h-[46px] ' +
-    'w1366:w-[370px] w1366:h-[37px] ' +
-    'w1440:w-[452px] w1440:h-[46px] ' +
-    'w1920:w-[555px] w1920:h-[56px] ' +
-    'w2560:w-[658px] w2560:h-[74px]';
+    'font-black text-xl leading-none tracking-normal capitalize w-[250px] h-[27px] py-1 flex items-center justify-center cursor-pointer text-[#053b60] ' +
+    'w1194:w-[370px] w1194:h-[37px] w1194:text-2xl ' +
+    'w1280:w-[452px] w1280:h-[46px] w1280:text-3xl ' +
+    'w1366:w-[370px] w1366:h-[37px] w1366:text-2xl ' +
+    'w1440:w-[452px] w1440:h-[46px] w1440:text-3xl ' +
+    'w1920:w-[555px] w1920:h-[56px] w1920:text-4xl ' +
+    'w2560:w-[658px] w2560:h-[74px] w2560:text-5xl';
 
   return (
     <div
