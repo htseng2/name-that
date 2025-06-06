@@ -2,11 +2,14 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import questionMark from '../assets/question-mark.webp';
 import playIcon from '../assets/play.webp';
 import pauseIcon from '../assets/pause.webp';
-import songFile from '../assets/songs/baby-one-more-time.m4a';
 import volumeIcon from '../assets/volume.webp';
 import muteIcon from '../assets/mute.webp';
 
-const MusicPlayer: React.FC = () => {
+interface MusicPlayerProps {
+  songUrl: string;
+}
+
+const MusicPlayer: React.FC<MusicPlayerProps> = ({ songUrl }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [duration, setDuration] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
@@ -20,6 +23,16 @@ const MusicPlayer: React.FC = () => {
   const volumeBarElapsedRef = useRef<HTMLDivElement | null>(null);
   const progressBarBackgroundRef = useRef<HTMLDivElement | null>(null);
   const volumeBarBackgroundRef = useRef<HTMLDivElement | null>(null);
+
+  // Reset player state when song changes
+  useEffect(() => {
+    setIsPlaying(false);
+    setCurrentTime(0);
+    setDuration(0);
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+    }
+  }, [songUrl]);
 
   // Initialize audio volume and muted state
   useEffect(() => {
@@ -243,7 +256,7 @@ const MusicPlayer: React.FC = () => {
     <div className="absolute w-[975px] h-[530px] bottom-[53.5px] left-1/2 -translate-x-1/2 rounded-[24px] bg-black">
       <audio
         ref={audioRef}
-        src={songFile}
+        src={songUrl}
         onLoadedMetadata={handleLoadedMetadata}
         onTimeUpdate={handleTimeUpdate}
         onEnded={handleSongEnd}

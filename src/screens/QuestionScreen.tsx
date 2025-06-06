@@ -2,7 +2,6 @@ import React from 'react';
 import MusicPlayer from '../components/MusicPlayer';
 import MovieQuestion from '../components/MovieQuestion';
 import { QUESTIONS_DATABASE } from '../constants';
-import toyStory from '../assets/movies/toy-story.webp';
 
 interface QuestionScreenProps {
   round: number;
@@ -10,6 +9,11 @@ interface QuestionScreenProps {
 }
 
 function QuestionScreen({ round, questionIndex }: QuestionScreenProps) {
+  // Calculate the global question index across all rounds
+  // For now, we'll cycle through the questions in order
+  const globalQuestionIndex = ((round - 1) * 10 + questionIndex) % QUESTIONS_DATABASE.length;
+  const currentQuestion = QUESTIONS_DATABASE[globalQuestionIndex];
+
   return (
     <div className="w-full h-full flex flex-col items-center pt-6 relative">
       <div className="flex flex-col items-center w-fit mx-auto">
@@ -20,8 +24,12 @@ function QuestionScreen({ round, questionIndex }: QuestionScreenProps) {
           QUESTION {questionIndex + 1}
         </div>
       </div>
-      {/* <MusicPlayer /> */}
-      <MovieQuestion movieScreenshotUrl={toyStory} />
+
+      {currentQuestion.type === 'song' ? (
+        <MusicPlayer songUrl={currentQuestion.url} />
+      ) : (
+        <MovieQuestion movieScreenshotUrl={currentQuestion.url} />
+      )}
     </div>
   );
 }
