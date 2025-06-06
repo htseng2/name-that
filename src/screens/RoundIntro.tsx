@@ -13,7 +13,7 @@ function RoundIntro({ round, questionsPerRound, onAnimationComplete }: RoundIntr
   }, [onAnimationComplete]);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center gap-4 w1194:gap-6 w1920:gap-8 w2560:gap-12">
+    <div className="w-full h-full flex flex-col items-center justify-center gap-4 w1194:gap-6 w1920:gap-8 w2560:gap-12 overflow-hidden">
       <div>
         <Logo />
       </div>
