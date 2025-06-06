@@ -36,7 +36,17 @@ const SettingsPopup: React.FC<SettingsPopupProps> = ({
     'w2560:w-[585px] w2560:h-[1375px]';
 
   return (
-    <div className="absolute inset-0 w-full h-full bg-black/50 z-[1000]" onClick={handleClose}>
+    <div
+      className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/50 z-[1000] overflow-hidden
+      w-[852px] h-[393px]
+      w1194:w-[1194px] w1194:h-[834px]
+      w1280:w-[1280px] w1280:h-[1024px]
+      w1366:w-[1366px] w1366:h-[768px]
+      w1440:w-[1440px] w1440:h-[1024px]
+      w1920:w-[1920px] w1920:h-[1080px]
+      w2560:w-[2560px] w2560:h-[1440px]"
+      onClick={handleClose}
+    >
       <div
         className={`${settingsPopupBaseClasses} ${
           closing ? 'animate-slideOut' : 'animate-slideIn'
