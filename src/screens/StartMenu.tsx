@@ -74,12 +74,13 @@ function StartMenu({
   return (
     <div
       className="grid items-center grid-rows-[27px_1fr_36px] grid-cols-6 gap-4 w-full h-full
-      w1194:grid-rows-[52px_1fr_50px] w1194:gap-y-[92px]
-      w1280:grid-rows-[54px_1fr_50px] w1280:gap-y-[142px]
-      w1366:grid-rows-[54px_1fr_50px] w1366:gap-y-[83px]
-      w1440:grid-rows-[52px_1fr_50px] w1440:gap-y-[142px]
-      w1920:grid-rows-[64px_1fr_64px] w1920:gap-y-[110px]
-      w2560:grid-rows-[84px_1fr_84px] w2560:gap-y-[165px]"
+      pt-[42px] px-[32px] pb-[32px]
+      w1194:grid-rows-[52px_1fr_50px] w1194:gap-y-[92px] w1194:pt-[96px] w1194:px-[74px] w1194:pb-[64px]
+      w1280:grid-rows-[54px_1fr_50px] w1280:gap-y-[142px] w1280:p-[74px]
+      w1366:grid-rows-[54px_1fr_50px] w1366:gap-y-[83px] w1366:p-[64px]
+      w1440:grid-rows-[52px_1fr_50px] w1440:gap-y-[142px] w1440:p-[72px]
+      w1920:grid-rows-[64px_1fr_64px] w1920:gap-y-[110px] w1920:p-[96px]
+      w2560:grid-rows-[84px_1fr_84px] w2560:gap-y-[165px] w2560:p-[128px]"
     >
       <Logo ref={logoRef} />
       <EditionPicker
