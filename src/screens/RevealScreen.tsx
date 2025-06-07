@@ -1,21 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 interface RevealScreenProps {
   round: number;
   onNext: () => void;
+  onReady?: () => void;
 }
 
-function RevealScreen({ round, onNext }: RevealScreenProps) {
+function RevealScreen({ round, onReady }: RevealScreenProps) {
+  useEffect(() => {
+    // Show navigation buttons after a short delay
+    const timer = setTimeout(() => {
+      onReady?.();
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [onReady]);
   return (
     <div className="flex flex-col items-center justify-center w-full h-full gap-4 text-white">
-      <h3 className="text-3xl font-bold">Reveal for Round {round}</h3>
-      <button
-        type="button"
-        className="w-[216px] h-[50px] px-6 py-3 rounded-[8px] bg-gradient-to-b from-[#66ed18] to-[#0e890e] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] flex items-center justify-center font-black text-2xl leading-none tracking-normal text-white active:bg-blend-overlay active:shadow-[0px_1px_4px_0px_rgba(0,0,0,0.25)] active:[background:linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.2)),linear-gradient(180deg,#66ed18_-33.77%,#0e890e_107.78%)] disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none"
-        onClick={onNext}
+      <div
+        className="font-black leading-none tracking-[.05em] text-center uppercase text-[#e2e2e2] py-2 [text-shadow:0px_-1px_1px_rgba(255,255,255,0.5),_0px_4px_4px_rgba(0,0,0,0.25)]
+        text-[36px]
+        w1194:text-[48px]
+        w1280:text-[52px]
+        w1366:text-[48px]
+        w1440:text-[56px]
+        w1920:text-[56px]
+        w2560:text-[68px]"
       >
-        Next
-      </button>
+        ROUND {round}
+      </div>
+      <h3 className="text-3xl font-bold">Reveal for Round {round}</h3>
     </div>
   );
 }

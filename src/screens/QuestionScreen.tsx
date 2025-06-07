@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MusicPlayer from '../components/MusicPlayer';
 import MovieQuestion from '../components/MovieQuestion';
 import { QUESTIONS_DATABASE } from '../constants';
@@ -6,9 +6,18 @@ import { QUESTIONS_DATABASE } from '../constants';
 interface QuestionScreenProps {
   round: number;
   questionIndex: number;
+  onReady?: () => void;
 }
 
-function QuestionScreen({ round, questionIndex }: QuestionScreenProps) {
+function QuestionScreen({ round, questionIndex, onReady }: QuestionScreenProps) {
+  useEffect(() => {
+    // Show navigation buttons after a short delay
+    const timer = setTimeout(() => {
+      onReady?.();
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [onReady]);
   // Calculate the global question index across all rounds
   // For now, we'll cycle through the questions in order
   const globalQuestionIndex = ((round - 1) * 10 + questionIndex) % QUESTIONS_DATABASE.length;

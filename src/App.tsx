@@ -30,11 +30,17 @@ function App() {
   const [_selectedEditionIndex, setSelectedEditionIndex] = useState<number | null>(null);
   const [roundIntroKey, setRoundIntroKey] = useState(0);
   const [showRoundIntroButton, setShowRoundIntroButton] = useState(false);
+  const [showRevealButtons, setShowRevealButtons] = useState(false);
+  const [showQuestionButtons, setShowQuestionButtons] = useState(false);
 
   const goTo = (next: Screen) => {
+    // Reset all navigation button states
+    setShowRoundIntroButton(false);
+    setShowRevealButtons(false);
+    setShowQuestionButtons(false);
+
     if (next === 'intro') {
       setRoundIntroKey(prevKey => prevKey + 1);
-      setShowRoundIntroButton(false);
     }
     setScreen(next);
   };
@@ -98,12 +104,26 @@ function App() {
         // Only show previous button if we're not on the very first question of the game
         const isFirstQuestionOfGame = round === 1 && questionIndex === 0;
         return {
-          showNext: true,
-          showPrevious: !isFirstQuestionOfGame,
+          showNext: showQuestionButtons,
+          showPrevious: showQuestionButtons && !isFirstQuestionOfGame,
           onNext: handleQuestionNext,
           onPrevious: handlePreviousQuestion,
           nextLabel: 'Answer Question',
           previousLabel: 'Previous Question',
+          shouldBlinkNext: false,
+        };
+      case 'reveal':
+        return {
+          showNext: showRevealButtons,
+          showPrevious: showRevealButtons,
+          onNext: handleRevealNext,
+          onPrevious: () => {
+            // Go back to the last question of the current round
+            setQuestionIndex(settings.questionsPerRound - 1);
+            goTo('question');
+          },
+          nextLabel: round < settings.rounds ? 'Next Round' : 'Game Over',
+          previousLabel: 'Back to Questions',
           shouldBlinkNext: false,
         };
       default:
@@ -140,9 +160,21 @@ function App() {
           />
         );
       case 'question':
-        return <QuestionScreen round={round} questionIndex={questionIndex} />;
+        return (
+          <QuestionScreen
+            round={round}
+            questionIndex={questionIndex}
+            onReady={() => setShowQuestionButtons(true)}
+          />
+        );
       case 'reveal':
-        return <RevealScreen round={round} onNext={handleRevealNext} />;
+        return (
+          <RevealScreen
+            round={round}
+            onNext={handleRevealNext}
+            onReady={() => setShowRevealButtons(true)}
+          />
+        );
       case 'over':
         return <GameOverScreen onRestart={() => goTo('start')} />;
       default:
