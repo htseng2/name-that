@@ -15,7 +15,16 @@ function QuestionScreen({ round, questionIndex }: QuestionScreenProps) {
   const currentQuestion = QUESTIONS_DATABASE[globalQuestionIndex];
 
   return (
-    <div className="w-full h-full flex flex-col items-center pt-6 relative">
+    <div
+      className="w-full h-full flex flex-col items-center relative
+      pt-6 gap-4
+      w1194:pt-8 w1194:gap-6
+      w1280:pt-8 w1280:gap-8
+      w1366:pt-8 w1366:gap-6
+      w1440:pt-10 w1440:gap-8
+      w1920:pt-12 w1920:gap-10
+      w2560:pt-16 w2560:gap-12"
+    >
       <div className="flex flex-col items-center w-fit mx-auto">
         <div
           className="font-black leading-none tracking-[.05em] uppercase text-[#8796a0] py-1
