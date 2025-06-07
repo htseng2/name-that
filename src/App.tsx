@@ -68,9 +68,16 @@ function App() {
 
   const handlePreviousQuestion = () => {
     if (questionIndex > 0) {
+      // Go to previous question in the same round
       setQuestionIndex(questionIndex - 1);
       goTo('question');
+    } else if (round > 1) {
+      // Go to the last question of the previous round
+      setRound(round - 1);
+      setQuestionIndex(settings.questionsPerRound - 1);
+      goTo('question');
     } else {
+      // We're on the first question of the first round, go back to intro
       goTo('intro');
     }
   };
@@ -88,9 +95,11 @@ function App() {
           shouldBlinkNext: true,
         };
       case 'question':
+        // Only show previous button if we're not on the very first question of the game
+        const isFirstQuestionOfGame = round === 1 && questionIndex === 0;
         return {
           showNext: true,
-          showPrevious: true,
+          showPrevious: !isFirstQuestionOfGame,
           onNext: handleQuestionNext,
           onPrevious: handlePreviousQuestion,
           nextLabel: 'Answer Question',
