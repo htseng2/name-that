@@ -253,7 +253,16 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ songUrl }) => {
   }, [isDraggingVolume, updateVolumeFromScrub]);
 
   return (
-    <div className="absolute w-[975px] h-[530px] bottom-[53.5px] left-1/2 -translate-x-1/2 rounded-[24px] bg-black">
+    <div
+      className="relative w-fit my-[6px] mx-auto rounded-[12px] bg-black
+      w-[380px] h-[200px]
+      w1194:w-[900px] w1194:h-[530px] w1194:rounded-[24px]
+      w1280:w-[1000px] w1280:h-[590px]
+      w1366:w-[950px] w1366:h-[560px]
+      w1440:w-[1050px] w1440:h-[620px]
+      w1920:w-[1092px] w1920:h-[645px]
+      w2560:w-[1200px] w2560:h-[710px]"
+    >
       <audio
         ref={audioRef}
         src={songUrl}
@@ -262,19 +271,62 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ songUrl }) => {
         onEnded={handleSongEnd}
       />
 
-      <div className="w-[853px] h-[321px] bg-neutral-700 rounded-[24px] mt-[38px] mx-auto flex items-center justify-center py-[31px]">
+      <div
+        className="bg-neutral-700 rounded-[12px] mx-auto flex items-center justify-center
+        w-[340px] h-[130px] mt-[12px] py-[12px]
+        w1194:w-[800px] w1194:h-[360px] w1194:mt-[38px] w1194:py-[31px] w1194:rounded-[24px]
+        w1280:w-[880px] w1280:h-[400px] w1280:mt-[42px] w1280:py-[35px]
+        w1366:w-[840px] w1366:h-[380px] w1366:mt-[40px] w1366:py-[33px]
+        w1440:w-[920px] w1440:h-[420px] w1440:mt-[45px] w1440:py-[37px]
+        w1920:w-[960px] w1920:h-[440px] w1920:mt-[48px] w1920:py-[39px]
+        w2560:w-[1050px] w2560:h-[480px] w2560:mt-[52px] w2560:py-[42px]"
+      >
         <img src={questionMark} alt="Question Visual" className="w-full h-full object-contain" />
       </div>
 
-      <div className="mt-[33px] mx-[61px] flex justify-center items-center relative">
+      <div
+        className="flex justify-center items-center relative
+        mt-[12px] mx-[12px]
+        w1194:mt-[33px] w1194:mx-[50px]
+        w1280:mt-[36px] w1280:mx-[55px]
+        w1366:mt-[34px] w1366:mx-[52px]
+        w1440:mt-[38px] w1440:mx-[58px]
+        w1920:mt-[40px] w1920:mx-[61px]
+        w2560:mt-[44px] w2560:mx-[67px]"
+      >
         {/* Play/Pause Button, Progress Bar, and Time Displays */}
-        <div className="flex items-center w-[412px] mt-3 mx-auto gap-3">
-          <span className="font-sans font-normal text-xl leading-none text-neutral-400">
+        <div
+          className="flex items-center mx-auto gap-1
+          w-[280px] mt-1
+          w1194:w-[412px] w1194:mt-3 w1194:gap-3
+          w1280:w-[460px] w1280:mt-3 w1280:gap-3
+          w1366:w-[435px] w1366:mt-3 w1366:gap-3
+          w1440:w-[480px] w1440:mt-3 w1440:gap-3
+          w1920:w-[500px] w1920:mt-3 w1920:gap-3
+          w2560:w-[550px] w2560:mt-3 w2560:gap-3"
+        >
+          <span
+            className="font-sans font-normal leading-none text-neutral-400
+            text-xs
+            w1194:text-xl
+            w1280:text-xl
+            w1366:text-lg
+            w1440:text-xl
+            w1920:text-xl
+            w2560:text-2xl"
+          >
             {formatTime(currentTime)}
           </span>
           <div
             ref={progressBarBackgroundRef}
-            className="flex-grow h-[6px] bg-neutral-700 rounded-full overflow-hidden relative cursor-pointer"
+            className="flex-grow bg-neutral-700 rounded-full overflow-hidden relative cursor-pointer
+              h-[3px]
+              w1194:h-[6px]
+              w1280:h-[6px]
+              w1366:h-[6px]
+              w1440:h-[6px]
+              w1920:h-[6px]
+              w2560:h-[7px]"
             onMouseDown={handleProgressMouseDown}
             onTouchStart={handleProgressTouchStart}
           >
@@ -284,33 +336,78 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ songUrl }) => {
               style={{ width: '0%' }}
             />
           </div>
-          <span className="font-sans font-normal text-xl leading-none text-neutral-400">
+          <span
+            className="font-sans font-normal leading-none text-neutral-400
+            text-xs
+            w1194:text-xl
+            w1280:text-xl
+            w1366:text-lg
+            w1440:text-xl
+            w1920:text-xl
+            w2560:text-2xl"
+          >
             {formatTime(duration)}
           </span>
         </div>
 
         <button
           onClick={togglePlayPause}
-          className="w-[60px] h-[60px] bg-white rounded-full flex items-center justify-center border-none p-0 cursor-pointer absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="bg-white rounded-full flex items-center justify-center border-none p-0 cursor-pointer absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+            w-[32px] h-[32px]
+            w1194:w-[60px] w1194:h-[60px]
+            w1280:w-[65px] w1280:h-[65px]
+            w1366:w-[62px] w1366:h-[62px]
+            w1440:w-[68px] w1440:h-[68px]
+            w1920:w-[70px] w1920:h-[70px]
+            w2560:w-[77px] w2560:h-[77px]"
         >
           <img
             src={isPlaying ? pauseIcon : playIcon}
             alt={isPlaying ? 'Pause' : 'Play'}
-            className="w-[22px] h-[22px] object-contain"
+            className="object-contain
+              w-[12px] h-[12px]
+              w1194:w-[22px] w1194:h-[22px]
+              w1280:w-[24px] w1280:h-[24px]
+              w1366:w-[23px] w1366:h-[23px]
+              w1440:w-[25px] w1440:h-[25px]
+              w1920:w-[26px] w1920:h-[26px]
+              w2560:w-[28px] w2560:h-[28px]"
           />
         </button>
 
         {/* Volume Control */}
-        <div className="absolute top-1/2 -translate-y-1/2 right-0 flex items-center gap-2">
+        <div
+          className="absolute top-1/2 -translate-y-1/2 right-0 flex items-center gap-1
+          w1194:gap-2
+          w1280:gap-2
+          w1366:gap-2
+          w1440:gap-2
+          w1920:gap-2
+          w2560:gap-2"
+        >
           <img
             src={isMuted || volume === 0 ? muteIcon : volumeIcon}
             alt="Volume"
             onClick={toggleMute}
-            className="w-6 h-6 cursor-pointer"
+            className="cursor-pointer
+              w-3 h-3
+              w1194:w-6 w1194:h-6
+              w1280:w-6 w1280:h-6
+              w1366:w-6 w1366:h-6
+              w1440:w-7 w1440:h-7
+              w1920:w-7 w1920:h-7
+              w2560:w-8 w2560:h-8"
           />
           <div
             ref={volumeBarBackgroundRef}
-            className="w-[100px] h-[6px] bg-neutral-700 rounded-full overflow-hidden relative cursor-pointer"
+            className="bg-neutral-700 rounded-full overflow-hidden relative cursor-pointer
+              w-[60px] h-[3px]
+              w1194:w-[100px] w1194:h-[6px]
+              w1280:w-[110px] w1280:h-[6px]
+              w1366:w-[105px] w1366:h-[6px]
+              w1440:w-[115px] w1440:h-[6px]
+              w1920:w-[120px] w1920:h-[6px]
+              w2560:w-[130px] w2560:h-[7px]"
             onMouseDown={handleVolumeMouseDown}
             onTouchStart={handleVolumeTouchStart}
           >
