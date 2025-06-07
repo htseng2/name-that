@@ -255,7 +255,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ songUrl }) => {
   return (
     <div
       className="relative w-fit my-[6px] mx-auto rounded-[12px] bg-black
-      w-[380px] h-[180px]
+      w-[412px] pt-4 pb-4
       w1194:w-[900px] w1194:h-[480px] w1194:rounded-[24px]
       w1280:w-[1000px] w1280:h-[540px]
       w1366:w-[950px] w1366:h-[510px]
