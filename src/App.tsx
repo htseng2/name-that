@@ -153,7 +153,7 @@ function App() {
   return (
     <div className="min-h-dvh min-w-dvw bg-neutral-700 font-sans box-border overflow-hidden flex justify-center items-center">
       <div
-        className="relative bg-radial-app-content flex flex-col items-center overflow-y-auto flex-shrink-0 
+        className="relative bg-radial-app-content flex flex-col items-center overflow-y-auto overflow-x-hidden flex-shrink-0 
       w-[852px] h-[393px] 
       w1194:w-[1194px] w1194:h-[834px] 
       w1280:w-[1280px] w1280:h-[1024px] 
