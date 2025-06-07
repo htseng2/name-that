@@ -17,10 +17,28 @@ function QuestionScreen({ round, questionIndex }: QuestionScreenProps) {
   return (
     <div className="w-full h-full flex flex-col items-center pt-6 relative">
       <div className="flex flex-col items-center w-fit mx-auto">
-        <div className="font-black text-[32px] leading-none tracking-[.05em] uppercase text-[#8796a0] py-1">
+        <div
+          className="font-black leading-none tracking-[.05em] uppercase text-[#8796a0] py-1
+        text-[20px]
+        w1194:text-[28px]
+        w1280:text-[30px]
+        w1366:text-[28px]
+        w1440:text-[32px]
+        w1920:text-[32px]
+        w2560:text-[40px]"
+        >
           ROUND {round}
         </div>
-        <div className="font-black text-[56px] leading-none tracking-[.05em] text-center uppercase text-[#e2e2e2] py-2 [text-shadow:0px_-1px_1px_rgba(255,255,255,0.5),_0px_4px_4px_rgba(0,0,0,0.25)]">
+        <div
+          className="font-black leading-none tracking-[.05em] text-center uppercase text-[#e2e2e2] py-2 [text-shadow:0px_-1px_1px_rgba(255,255,255,0.5),_0px_4px_4px_rgba(0,0,0,0.25)]
+        text-[36px]
+        w1194:text-[48px]
+        w1280:text-[52px]
+        w1366:text-[48px]
+        w1440:text-[56px]
+        w1920:text-[56px]
+        w2560:text-[68px]"
+        >
           QUESTION {questionIndex + 1}
         </div>
       </div>
