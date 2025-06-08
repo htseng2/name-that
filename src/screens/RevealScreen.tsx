@@ -5,11 +5,12 @@ import { QUESTIONS_DATABASE } from '../constants';
 interface RevealScreenProps {
   round: number;
   questionsPerRound: number;
+  gameQuestions: typeof QUESTIONS_DATABASE;
   onNext: () => void;
   onReady?: () => void;
 }
 
-function RevealScreen({ round, questionsPerRound, onReady }: RevealScreenProps) {
+function RevealScreen({ round, questionsPerRound, gameQuestions, onReady }: RevealScreenProps) {
   useEffect(() => {
     // Show navigation buttons after a short delay
     const timer = setTimeout(() => {
@@ -19,15 +20,15 @@ function RevealScreen({ round, questionsPerRound, onReady }: RevealScreenProps) 
     return () => clearTimeout(timer);
   }, [onReady]);
 
-  // Generate 10 questions for this round (always show 10 regardless of questionsPerRound setting)
+  // Generate 10 questions for this round using the current round's shuffled questions
   const getRoundQuestions = () => {
     const questions = [];
     for (let i = 0; i < 10; i++) {
-      const globalQuestionIndex = ((round - 1) * 10 + i) % QUESTIONS_DATABASE.length;
-      const question = QUESTIONS_DATABASE[globalQuestionIndex];
+      // Use questions directly from the shuffled array for this round
+      const question = gameQuestions[i] || gameQuestions[0]; // Fallback to first question if index out of bounds
       questions.push({
         number: i + 1,
-        answer: question.answer,
+        answer: question?.answer || 'Unknown',
       });
     }
     return questions;

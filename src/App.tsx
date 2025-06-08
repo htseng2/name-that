@@ -5,6 +5,7 @@ import QuestionScreen from './screens/QuestionScreen';
 import RevealScreen from './screens/RevealScreen';
 import GameOverScreen from './screens/GameOverScreen';
 import NavigationButton from './components/NavigationButton';
+import { QUESTIONS_DATABASE } from './constants';
 
 type Screen = 'start' | 'intro' | 'question' | 'reveal' | 'over';
 
@@ -32,6 +33,17 @@ function App() {
   const [showRoundIntroButton, setShowRoundIntroButton] = useState(false);
   const [showRevealButtons, setShowRevealButtons] = useState(false);
   const [showQuestionButtons, setShowQuestionButtons] = useState(false);
+  const [gameQuestions, setGameQuestions] = useState<typeof QUESTIONS_DATABASE>([]);
+
+  // Utility function to shuffle array
+  const shuffleArray = <T,>(array: T[]): T[] => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
 
   const goTo = (next: Screen) => {
     // Reset all navigation button states
@@ -50,6 +62,11 @@ function App() {
     setSelectedEditionIndex(selectedIndex);
     setRound(1);
     setQuestionIndex(0);
+
+    // Generate random questions for round 1
+    const shuffledQuestions = shuffleArray(QUESTIONS_DATABASE);
+    setGameQuestions(shuffledQuestions);
+
     goTo('intro');
   };
 
@@ -57,6 +74,11 @@ function App() {
     if (round < settings.rounds) {
       setRound(round + 1);
       setQuestionIndex(0);
+
+      // Generate new random questions for the next round
+      const shuffledQuestions = shuffleArray(QUESTIONS_DATABASE);
+      setGameQuestions(shuffledQuestions);
+
       goTo('intro');
     } else {
       goTo('over');
@@ -164,6 +186,7 @@ function App() {
           <QuestionScreen
             round={round}
             questionIndex={questionIndex}
+            gameQuestions={gameQuestions}
             onReady={() => setShowQuestionButtons(true)}
           />
         );
@@ -172,6 +195,7 @@ function App() {
           <RevealScreen
             round={round}
             questionsPerRound={settings.questionsPerRound}
+            gameQuestions={gameQuestions}
             onNext={handleRevealNext}
             onReady={() => setShowRevealButtons(true)}
           />

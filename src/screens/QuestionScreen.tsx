@@ -6,10 +6,11 @@ import { QUESTIONS_DATABASE } from '../constants';
 interface QuestionScreenProps {
   round: number;
   questionIndex: number;
+  gameQuestions: typeof QUESTIONS_DATABASE;
   onReady?: () => void;
 }
 
-function QuestionScreen({ round, questionIndex, onReady }: QuestionScreenProps) {
+function QuestionScreen({ round, questionIndex, gameQuestions, onReady }: QuestionScreenProps) {
   useEffect(() => {
     // Show navigation buttons after a short delay
     const timer = setTimeout(() => {
@@ -18,10 +19,8 @@ function QuestionScreen({ round, questionIndex, onReady }: QuestionScreenProps) 
 
     return () => clearTimeout(timer);
   }, [onReady]);
-  // Calculate the global question index across all rounds
-  // For now, we'll cycle through the questions in order
-  const globalQuestionIndex = ((round - 1) * 10 + questionIndex) % QUESTIONS_DATABASE.length;
-  const currentQuestion = QUESTIONS_DATABASE[globalQuestionIndex];
+  // Use the question index directly from the current round's shuffled questions
+  const currentQuestion = gameQuestions[questionIndex] || gameQuestions[0]; // Fallback to first question if index out of bounds
 
   return (
     <div
