@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import AnswerRevealItem from '../components/AnswerRevealItem';
 
 interface RevealScreenProps {
   round: number;
@@ -7,8 +8,6 @@ interface RevealScreenProps {
 }
 
 function RevealScreen({ round, onReady }: RevealScreenProps) {
-  const [isRevealed, setIsRevealed] = useState(false);
-
   useEffect(() => {
     // Show navigation buttons after a short delay
     const timer = setTimeout(() => {
@@ -17,10 +16,6 @@ function RevealScreen({ round, onReady }: RevealScreenProps) {
 
     return () => clearTimeout(timer);
   }, [onReady]);
-
-  const handleReveal = () => {
-    setIsRevealed(true);
-  };
   return (
     <div className="flex flex-col items-center justify-center w-full h-full gap-4 text-white">
       <div
@@ -36,24 +31,7 @@ function RevealScreen({ round, onReady }: RevealScreenProps) {
         ROUND {round}
       </div>
       <div className="flex flex-col items-center justify-center w-full h-full gap-1 text-[#053B60]">
-        <div className="flex gap-1 w-[585px]">
-          <div className="bg-white w-[30px] h-[26px] flex items-center justify-center p-1">1</div>
-          <div className="relative w-[550px] h-[26px]">
-            {/* Answer (behind) */}
-            <div className="absolute inset-0 bg-white flex items-center justify-start p-1">
-              GIMME MORE (BRITNEY SPEARS)
-            </div>
-            {/* Instruction (in front, clickable) */}
-            {!isRevealed && (
-              <div
-                className="absolute inset-0 bg-[#FBD11E] flex items-center justify-start p-0 cursor-pointer border-4 border-[#FBD11E] transition-all hover:[background:linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.2)),#FBD11E]"
-                onClick={handleReveal}
-              >
-                <span className="px-1">CLICK ANY YELLOW SPACE TO REVEAL THE ANSWER</span>
-              </div>
-            )}
-          </div>
-        </div>
+        <AnswerRevealItem number={1} answer="GIMME MORE (BRITNEY SPEARS)" />
       </div>
     </div>
   );
