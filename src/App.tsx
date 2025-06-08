@@ -171,6 +171,7 @@ function App() {
         return (
           <RevealScreen
             round={round}
+            questionsPerRound={settings.questionsPerRound}
             onNext={handleRevealNext}
             onReady={() => setShowRevealButtons(true)}
           />

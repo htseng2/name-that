@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import AnswerRevealItem from '../components/AnswerRevealItem';
+import { QUESTIONS_DATABASE } from '../constants';
 
 interface RevealScreenProps {
   round: number;
+  questionsPerRound: number;
   onNext: () => void;
   onReady?: () => void;
 }
 
-function RevealScreen({ round, onReady }: RevealScreenProps) {
+function RevealScreen({ round, questionsPerRound, onReady }: RevealScreenProps) {
   useEffect(() => {
     // Show navigation buttons after a short delay
     const timer = setTimeout(() => {
@@ -16,6 +18,22 @@ function RevealScreen({ round, onReady }: RevealScreenProps) {
 
     return () => clearTimeout(timer);
   }, [onReady]);
+
+  // Generate 10 questions for this round (always show 10 regardless of questionsPerRound setting)
+  const getRoundQuestions = () => {
+    const questions = [];
+    for (let i = 0; i < 10; i++) {
+      const globalQuestionIndex = ((round - 1) * 10 + i) % QUESTIONS_DATABASE.length;
+      const question = QUESTIONS_DATABASE[globalQuestionIndex];
+      questions.push({
+        number: i + 1,
+        answer: question.answer,
+      });
+    }
+    return questions;
+  };
+
+  const roundQuestions = getRoundQuestions();
   return (
     <div className="flex flex-col items-center justify-center w-full h-full gap-4 text-white">
       <div
@@ -31,7 +49,14 @@ function RevealScreen({ round, onReady }: RevealScreenProps) {
         ROUND {round}
       </div>
       <div className="flex flex-col items-center justify-center w-full h-full gap-1 text-[#053B60]">
-        <AnswerRevealItem number={1} answer="GIMME MORE (BRITNEY SPEARS)" />
+        {roundQuestions.map(question => (
+          <AnswerRevealItem
+            key={question.number}
+            number={question.number}
+            answer={question.answer}
+            isClickable={question.number <= questionsPerRound}
+          />
+        ))}
       </div>
     </div>
   );

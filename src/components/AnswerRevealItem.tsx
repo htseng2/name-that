@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 interface AnswerRevealItemProps {
   number: number;
   answer: string;
+  isClickable: boolean;
 }
 
-function AnswerRevealItem({ number, answer }: AnswerRevealItemProps) {
+function AnswerRevealItem({ number, answer, isClickable }: AnswerRevealItemProps) {
   const [isRevealed, setIsRevealed] = useState(false);
 
   const handleReveal = () => {
@@ -22,13 +23,19 @@ function AnswerRevealItem({ number, answer }: AnswerRevealItemProps) {
         <div className="absolute inset-0 bg-white flex items-center justify-start p-1">
           {answer}
         </div>
-        {/* Instruction (in front, clickable) */}
+        {/* Instruction (in front, clickable or not) */}
         {!isRevealed && (
           <div
-            className="absolute inset-0 bg-[#FBD11E] flex items-center justify-start p-0 cursor-pointer border-4 border-[#FBD11E] transition-all hover:[background:linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.2)),#FBD11E]"
-            onClick={handleReveal}
+            className={`absolute inset-0 bg-[#FBD11E] flex items-center justify-start p-0 border-4 border-[#FBD11E] ${
+              isClickable
+                ? 'cursor-pointer transition-all hover:[background:linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.2)),#FBD11E]'
+                : ''
+            }`}
+            onClick={isClickable ? handleReveal : undefined}
           >
-            <span className="px-1">CLICK ANY YELLOW SPACE TO REVEAL THE ANSWER</span>
+            {isClickable && (
+              <span className="px-1">CLICK ANY YELLOW SPACE TO REVEAL THE ANSWER</span>
+            )}
           </div>
         )}
       </div>
