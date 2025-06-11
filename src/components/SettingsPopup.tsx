@@ -66,10 +66,10 @@ const SettingsPopup: React.FC<SettingsPopupProps> = ({
                 Rounds
               </div>
               <div className="font-bold text-xs leading-none tracking-normal text-[#fbd11e]">
-                (Max = 4 Rounds)
+                (Max = 2 Rounds)
               </div>
             </div>
-            <RoundSelector min={1} max={4} initial={rounds} onChange={onChangeRounds} />
+            <RoundSelector min={1} max={2} initial={rounds} onChange={onChangeRounds} />
           </div>
           <div className="flex w-[272px] min-h-[36px] justify-between items-center">
             <div className="flex flex-col items-start">
@@ -77,12 +77,12 @@ const SettingsPopup: React.FC<SettingsPopupProps> = ({
                 Questions Per Round
               </div>
               <div className="font-bold text-xs leading-none tracking-normal text-[#fbd11e]">
-                (Max = 10 Questions)
+                (Max = 5 Questions)
               </div>
             </div>
             <RoundSelector
               min={1}
-              max={10}
+              max={5}
               initial={questionsPerRound}
               onChange={onChangeQuestionsPerRound}
             />
