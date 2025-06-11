@@ -25,10 +25,10 @@ function RevealScreen({ round, questionsPerRound, gameQuestions, onReady }: Reve
     const questions = [];
     for (let i = 0; i < 10; i++) {
       // Use questions directly from the shuffled array for this round
-      const question = gameQuestions[i] || gameQuestions[0]; // Fallback to first question if index out of bounds
+      const question = gameQuestions[i];
       questions.push({
         number: i + 1,
-        answer: question?.answer || 'Unknown',
+        answer: question?.answer || '???',
       });
     }
     return questions;

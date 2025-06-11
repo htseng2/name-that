@@ -34,6 +34,7 @@ function App() {
   const [showRevealButtons, setShowRevealButtons] = useState(false);
   const [showQuestionButtons, setShowQuestionButtons] = useState(false);
   const [gameQuestions, setGameQuestions] = useState<typeof QUESTIONS_DATABASE>([]);
+  const [allRoundsQuestions, setAllRoundsQuestions] = useState<(typeof QUESTIONS_DATABASE)[]>([]);
 
   // Utility function to shuffle array
   const shuffleArray = <T,>(array: T[]): T[] => {
@@ -63,9 +64,21 @@ function App() {
     setRound(1);
     setQuestionIndex(0);
 
-    // Generate random questions for round 1
-    const shuffledQuestions = shuffleArray(QUESTIONS_DATABASE);
-    setGameQuestions(shuffledQuestions);
+    // Shuffle the entire question database once
+    const shuffledDatabase = shuffleArray(QUESTIONS_DATABASE);
+
+    // Create question sets for all rounds
+    const newAllRoundsQuestions: (typeof QUESTIONS_DATABASE)[] = [];
+    let remaining = [...shuffledDatabase];
+
+    for (let i = 0; i < rounds; i++) {
+      const roundQuestions = remaining.slice(0, questionsPerRound);
+      newAllRoundsQuestions.push(roundQuestions);
+      remaining = remaining.slice(questionsPerRound);
+    }
+
+    setAllRoundsQuestions(newAllRoundsQuestions);
+    setGameQuestions(newAllRoundsQuestions[0] || []);
 
     goTo('intro');
   };
@@ -75,9 +88,8 @@ function App() {
       setRound(round + 1);
       setQuestionIndex(0);
 
-      // Generate new random questions for the next round
-      const shuffledQuestions = shuffleArray(QUESTIONS_DATABASE);
-      setGameQuestions(shuffledQuestions);
+      // Set questions for the next round
+      setGameQuestions(allRoundsQuestions[round] || []);
 
       goTo('intro');
     } else {
@@ -101,7 +113,9 @@ function App() {
       goTo('question');
     } else if (round > 1) {
       // Go to the last question of the previous round
-      setRound(round - 1);
+      const prevRound = round - 1;
+      setRound(prevRound);
+      setGameQuestions(allRoundsQuestions[prevRound - 1] || []);
       setQuestionIndex(settings.questionsPerRound - 1);
       goTo('question');
     } else {
