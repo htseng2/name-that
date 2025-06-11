@@ -28,7 +28,7 @@ function App() {
     rounds: 2,
     questionsPerRound: 2,
   });
-  const [_selectedEditionIndex, setSelectedEditionIndex] = useState<number | null>(null);
+  const [selectedEditionIndex, setSelectedEditionIndex] = useState<number | null>(null);
   const [roundIntroKey, setRoundIntroKey] = useState(0);
   const [showRoundIntroButton, setShowRoundIntroButton] = useState(false);
   const [showRevealButtons, setShowRevealButtons] = useState(false);
@@ -184,6 +184,7 @@ function App() {
             onChangeRounds={r => setSettings(s => ({ ...s, rounds: r }))}
             onChangeQuestionsPerRound={q => setSettings(s => ({ ...s, questionsPerRound: q }))}
             onStart={handleStart}
+            previouslySelectedIndex={selectedEditionIndex}
           />
         );
       case 'intro':

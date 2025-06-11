@@ -6,7 +6,7 @@ import EditionPicker from '../components/EditionPicker';
 import EditionDisplay from '../components/EditionDisplay';
 import SettingsPopup from '../components/SettingsPopup';
 import InfoPopup from '../components/InfoPopup';
-import { EDITION_OPTIONS } from '../constants';
+import { EDITION_OPTIONS } from '../constants/index';
 
 interface StartMenuProps {
   onStart: (params: {
@@ -18,6 +18,7 @@ interface StartMenuProps {
   questionsPerRound: number;
   onChangeRounds: (rounds: number) => void;
   onChangeQuestionsPerRound: (questions: number) => void;
+  previouslySelectedIndex: number | null;
 }
 
 function StartMenu({
@@ -26,13 +27,16 @@ function StartMenu({
   questionsPerRound,
   onChangeRounds,
   onChangeQuestionsPerRound,
+  previouslySelectedIndex,
 }: StartMenuProps) {
   const logoRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const pageSize = 6;
   const [showInfo, setShowInfo] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(
+    previouslySelectedIndex !== null ? previouslySelectedIndex : 0
+  );
 
   const isStartDisabled = selectedIndex === null || !EDITION_OPTIONS[selectedIndex]?.img;
 
@@ -85,7 +89,7 @@ function StartMenu({
       <Logo ref={logoRef} />
       <EditionPicker
         options={EDITION_OPTIONS}
-        selectedIndex={selectedIndex}
+        selectedIndex={selectedIndex ?? 0}
         onSelect={setSelectedIndex}
         pageSize={pageSize}
       />
